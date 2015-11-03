@@ -10,8 +10,7 @@ public class Student {
 	private int creditsTaken;
 
 	public String getName() {
-		// TODO - implement Student.getName
-		throw new UnsupportedOperationException();
+		return name;
 	}
 
 	/**
@@ -20,8 +19,11 @@ public class Student {
 	 */
 	public void setName(int studID) {
 		// TODO - implement Student.setName
-		throw new UnsupportedOperationException();
-	}
+		if (true){
+                    System.out.print("student ID");
+                }
+        }
+	
 
 	/**
 	 * 
