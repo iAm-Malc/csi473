@@ -19,9 +19,7 @@ public class Student {
 	 */
 	public void setName(int studID) {
 		// TODO - implement Student.setName
-		if (true){
-                    System.out.print("student ID");
-                }
+		
         }
 	
 
