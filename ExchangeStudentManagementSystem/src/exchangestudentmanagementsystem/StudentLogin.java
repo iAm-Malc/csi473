@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,12 +8,19 @@ package exchangestudentmanagementsystem;
 
 import java.awt.Color;
 
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BT
  */
 public class StudentLogin extends javax.swing.JFrame {
-
+    PreparedStatement myPstmt = null;
+    ResultSet myRs = null;
+    Connection myConn = null;
     /**
      * Creates new form Login
      */
@@ -56,6 +64,11 @@ public class StudentLogin extends javax.swing.JFrame {
         jLabel4.setText("Password:");
 
         login.setText("Login");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
 
         register.setText("Don't have an accout? Register");
 
@@ -138,6 +151,30 @@ public class StudentLogin extends javax.swing.JFrame {
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_cancelActionPerformed
 
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        try {
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_sam02379","sam02379","engagement");  
+            String user = username.getText();
+            int username1 = Integer.parseInt(user);
+            String password1 = password.getText();
+            String query = "SELECT * FROM csi473ProjectStudent WHERE StudentId = ? and Password = ?";
+            myPstmt = myConn.prepareStatement(query);
+            myPstmt.setInt(1,username1);
+            myPstmt.setString(2, password1);
+            myRs = myPstmt.executeQuery();
+            if(myRs.next())
+            {
+                JOptionPane.showMessageDialog(null,"Login Success.");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Invalid username or password, please try again.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_loginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -179,6 +216,8 @@ public class StudentLogin extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
