@@ -31,7 +31,7 @@ public class Home extends javax.swing.JFrame {
         studentLogin = new javax.swing.JButton();
         staffLogin = new javax.swing.JButton();
         advisorLogin = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        accRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 204, 255));
@@ -51,21 +51,12 @@ public class Home extends javax.swing.JFrame {
 
         advisorLogin.setText("OIE Advisor Login");
 
-        jButton4.setText("Don't Have An Account? Register");
+        accRegister.setText("Don't Have An Account? Register");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(39, 39, 39))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(162, 162, 162)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,6 +65,15 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(studentLogin)
                         .addComponent(staffLogin)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(accRegister)
+                        .addGap(26, 26, 26))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {advisorLogin, staffLogin, studentLogin});
@@ -83,15 +83,15 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
+                .addGap(67, 67, 67)
                 .addComponent(studentLogin)
                 .addGap(29, 29, 29)
                 .addComponent(staffLogin)
                 .addGap(29, 29, 29)
                 .addComponent(advisorLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(accRegister)
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -139,8 +139,8 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton accRegister;
     private javax.swing.JButton advisorLogin;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton staffLogin;
     private javax.swing.JButton studentLogin;

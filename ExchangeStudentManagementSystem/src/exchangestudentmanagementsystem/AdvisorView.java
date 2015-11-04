@@ -63,7 +63,7 @@ public class AdvisorView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(updateAppStat)
                             .addComponent(reviewApp))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(logout)
@@ -77,7 +77,7 @@ public class AdvisorView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addComponent(reviewApp)
                 .addGap(47, 47, 47)
                 .addComponent(updateAppStat)
@@ -87,6 +87,7 @@ public class AdvisorView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateAppStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppStatActionPerformed
