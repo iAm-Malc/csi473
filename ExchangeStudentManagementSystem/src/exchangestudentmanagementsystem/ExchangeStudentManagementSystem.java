@@ -43,7 +43,7 @@ public class ExchangeStudentManagementSystem {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new Home().setVisible(true);
-                new StudentView().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
