@@ -16,8 +16,7 @@ public class ExchangeStudentManagementSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        if ( Student == stud)
-            stud = stude;
+    
     }
     
 }
