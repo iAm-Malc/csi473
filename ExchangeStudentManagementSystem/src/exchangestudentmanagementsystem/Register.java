@@ -5,6 +5,8 @@
  */
 package exchangestudentmanagementsystem;
 
+import java.awt.Color;
+
 /**
  *
  * @author Malcolm
@@ -16,6 +18,7 @@ public class Register extends javax.swing.JFrame {
      */
     public Register() {
         initComponents();
+        getContentPane().setBackground(new Color(51,204,255));
     }
 
     /**

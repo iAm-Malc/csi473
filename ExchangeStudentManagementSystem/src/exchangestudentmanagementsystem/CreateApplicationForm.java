@@ -5,6 +5,8 @@
  */
 package exchangestudentmanagementsystem;
 
+import java.awt.Color;
+
 /**
  *
  * @author Malcolm
@@ -16,6 +18,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
      */
     public CreateApplicationForm() {
         initComponents();
+        getContentPane().setBackground(new Color(51,204,255));
     }
 
     /**
@@ -207,8 +210,8 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                     .addComponent(createAppName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel6))
                     .addComponent(createAppDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createAppStudID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))

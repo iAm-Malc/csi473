@@ -5,6 +5,8 @@
  */
 package exchangestudentmanagementsystem;
 
+import java.awt.Color;
+
 /**
  *
  * @author Malcolm
@@ -16,6 +18,7 @@ public class OIEStaff extends javax.swing.JFrame {
      */
     public OIEStaff() {
         initComponents();
+        getContentPane().setBackground(new Color(51,204,255));
     }
 
     /**
