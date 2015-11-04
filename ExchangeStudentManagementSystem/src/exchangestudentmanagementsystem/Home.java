@@ -52,10 +52,25 @@ public class Home extends javax.swing.JFrame {
         });
 
         staffLogin.setText("OIE Staff Login");
+        staffLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffLoginActionPerformed(evt);
+            }
+        });
 
         advisorLogin.setText("OIE Advisor Login");
+        advisorLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advisorLoginActionPerformed(evt);
+            }
+        });
 
         accRegister.setText("Don't Have An Account? Register");
+        accRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accRegisterActionPerformed(evt);
+            }
+        });
 
         exit.setText("Exit");
         exit.addActionListener(new java.awt.event.ActionListener() {
@@ -119,12 +134,24 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void studentLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentLoginActionPerformed
-        // TODO add your handling code here:
+        new Login().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_studentLoginActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_exitActionPerformed
+
+    private void staffLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffLoginActionPerformed
+        new Login().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_staffLoginActionPerformed
+
+    private void advisorLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advisorLoginActionPerformed
+        new Login().setVisible(true);   
+    }//GEN-LAST:event_advisorLoginActionPerformed
+
+    private void accRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accRegisterActionPerformed
+        new Register().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_accRegisterActionPerformed
 
     /**
      * @param args the command line arguments

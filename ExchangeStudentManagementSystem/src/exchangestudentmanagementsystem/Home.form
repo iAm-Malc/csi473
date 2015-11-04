@@ -107,16 +107,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="OIE Staff Login"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staffLoginActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="advisorLogin">
       <Properties>
         <Property name="text" type="java.lang.String" value="OIE Advisor Login"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="advisorLoginActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="accRegister">
       <Properties>
         <Property name="text" type="java.lang.String" value="Don&apos;t Have An Account? Register"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accRegisterActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="exit">
       <Properties>
