@@ -84,7 +84,7 @@ public class Home extends javax.swing.JApplet {
 
         stafflogin.setText("OIE Staff Login");
 
-        register.setText("Register");
+        register.setText("Don't have an account? Register");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
