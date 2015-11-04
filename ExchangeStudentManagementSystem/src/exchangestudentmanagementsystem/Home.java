@@ -32,6 +32,7 @@ public class Home extends javax.swing.JFrame {
         staffLogin = new javax.swing.JButton();
         advisorLogin = new javax.swing.JButton();
         accRegister = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 204, 255));
@@ -53,6 +54,13 @@ public class Home extends javax.swing.JFrame {
 
         accRegister.setText("Don't Have An Account? Register");
 
+        exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,14 +74,17 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(staffLogin)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 46, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(47, 47, 47))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(exit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(accRegister)
-                        .addGap(26, 26, 26))))
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {advisorLogin, staffLogin, studentLogin});
@@ -83,15 +94,21 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(67, 67, 67)
-                .addComponent(studentLogin)
-                .addGap(29, 29, 29)
-                .addComponent(staffLogin)
-                .addGap(29, 29, 29)
-                .addComponent(advisorLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(accRegister)
-                .addGap(33, 33, 33))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(studentLogin)
+                        .addGap(29, 29, 29)
+                        .addComponent(staffLogin)
+                        .addGap(29, 29, 29)
+                        .addComponent(advisorLogin)
+                        .addGap(33, 120, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(exit)
+                            .addComponent(accRegister))
+                        .addContainerGap())))
         );
 
         pack();
@@ -101,6 +118,10 @@ public class Home extends javax.swing.JFrame {
     private void studentLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_studentLoginActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +162,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accRegister;
     private javax.swing.JButton advisorLogin;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton staffLogin;
     private javax.swing.JButton studentLogin;
