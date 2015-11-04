@@ -2,15 +2,21 @@ package ExchangeStudentManagementSystem;
 
 public class ApplicationForm {
 
-	private int formNo;
+	private int appNo;
+	private int studID;
 
-	public void generateID() {
-		// TODO - implement ApplicationForm.generateID
+	public boolean submit() {
+		// TODO - implement Application.submit
 		throw new UnsupportedOperationException();
 	}
 
-	public int getID() {
-		// TODO - implement ApplicationForm.getID
+	public void create() {
+		// TODO - implement Application.create
+		throw new UnsupportedOperationException();
+	}
+
+	public void edit() {
+		// TODO - implement Application.edit
 		throw new UnsupportedOperationException();
 	}
 
