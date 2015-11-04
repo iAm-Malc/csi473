@@ -165,6 +165,7 @@ public class StudentLogin extends javax.swing.JFrame {
             if(myRs.next())
             {
                 JOptionPane.showMessageDialog(null,"Login Success.");
+                new StudentView().setVisible(true);
             }
             else
             {
