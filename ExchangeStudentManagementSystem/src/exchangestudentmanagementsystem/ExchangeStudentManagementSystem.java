@@ -42,7 +42,6 @@ public class ExchangeStudentManagementSystem {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Home().setVisible(true);
                 new Home().setVisible(true);
             }
         });

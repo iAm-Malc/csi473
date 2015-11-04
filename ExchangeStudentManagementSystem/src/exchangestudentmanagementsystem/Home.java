@@ -134,7 +134,8 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void studentLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentLoginActionPerformed
-        new Login().setVisible(true);        // TODO add your handling code here:
+        new StudentLogin().setVisible(true);        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_studentLoginActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
@@ -142,11 +143,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void staffLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffLoginActionPerformed
-        new Login().setVisible(true);        // TODO add your handling code here:
+        new StaffLogin().setVisible(true);  
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_staffLoginActionPerformed
 
     private void advisorLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advisorLoginActionPerformed
-        new Login().setVisible(true);   
+        new OIEAdvisorLogin().setVisible(true);   
+        this.setVisible(false);
     }//GEN-LAST:event_advisorLoginActionPerformed
 
     private void accRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accRegisterActionPerformed
