@@ -6,6 +6,7 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import javax.swing.JFrame;
 
 /**
  *
@@ -139,7 +140,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_studentLoginActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        this.setVisible(false);        // TODO add your handling code here:
+        // TODO add your handling code here:
+        this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
 
     private void staffLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffLoginActionPerformed
@@ -153,7 +156,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_advisorLoginActionPerformed
 
     private void accRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accRegisterActionPerformed
-        new Register().setVisible(true);        // TODO add your handling code here:
+        new Register().setVisible(true);
+        this.setVisible(false);
+// TODO add your handling code here:
     }//GEN-LAST:event_accRegisterActionPerformed
 
     /**
