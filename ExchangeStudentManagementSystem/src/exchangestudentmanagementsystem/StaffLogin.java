@@ -150,7 +150,7 @@ public class StaffLogin extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
-        String query = "SELECT * FROM csi473Staff";
+        String query = "SELECT * FROM csi473OIEStaff";
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -164,7 +164,7 @@ public class StaffLogin extends javax.swing.JFrame {
 //            
             while(myRs.next()){
                int uname = myRs.getInt("StaffID");
-               String pword = myRs.getString("Password");
+               String pword = myRs.getString("universityPassword");
                if((username1==uname) && (password1.equals(pword))){
                    new OIEStaff().setVisible(true);
                    dispose();

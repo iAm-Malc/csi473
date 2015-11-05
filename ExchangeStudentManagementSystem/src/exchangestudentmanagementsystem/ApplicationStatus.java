@@ -30,17 +30,17 @@ public class ApplicationStatus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        responseStatus = new javax.swing.ButtonGroup();
+        appStatus = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        received = new javax.swing.JRadioButton();
-        processing = new javax.swing.JRadioButton();
+        statSave = new javax.swing.JButton();
         accepted = new javax.swing.JRadioButton();
         rejected = new javax.swing.JRadioButton();
-        statSave = new javax.swing.JButton();
+        received = new javax.swing.JRadioButton();
+        processing = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,15 +56,24 @@ public class ApplicationStatus extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        received.setText("Received");
+        statSave.setText("SAVE");
+        statSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statSaveActionPerformed(evt);
+            }
+        });
 
-        processing.setText("Processing");
-
+        responseStatus.add(accepted);
         accepted.setText("Accepted");
 
+        responseStatus.add(rejected);
         rejected.setText("Rejected");
 
-        statSave.setText("SAVE");
+        appStatus.add(received);
+        received.setText("Received");
+
+        appStatus.add(processing);
+        processing.setText("Processing");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,7 +99,7 @@ public class ApplicationStatus extends javax.swing.JFrame {
                             .addComponent(rejected))))
                 .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(statSave, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
         );
@@ -106,16 +115,17 @@ public class ApplicationStatus extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(received)
-                                .addGap(39, 39, 39)
-                                .addComponent(processing))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
                                 .addComponent(accepted)
-                                .addGap(39, 39, 39)
-                                .addComponent(rejected))))
+                                .addGap(50, 50, 50)
+                                .addComponent(rejected))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(received)
+                                .addGap(49, 49, 49)
+                                .addComponent(processing))))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(statSave)
@@ -125,6 +135,10 @@ public class ApplicationStatus extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void statSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,8 +178,7 @@ public class ApplicationStatus extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton accepted;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup appStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -173,6 +186,7 @@ public class ApplicationStatus extends javax.swing.JFrame {
     private javax.swing.JRadioButton processing;
     private javax.swing.JRadioButton received;
     private javax.swing.JRadioButton rejected;
+    private javax.swing.ButtonGroup responseStatus;
     private javax.swing.JButton statSave;
     // End of variables declaration//GEN-END:variables
 }

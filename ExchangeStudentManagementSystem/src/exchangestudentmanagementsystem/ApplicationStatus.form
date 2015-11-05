@@ -2,9 +2,9 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="responseStatus">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    <Component class="javax.swing.ButtonGroup" name="appStatus">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -55,7 +55,7 @@
               <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="statSave" min="-2" pref="78" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
           </Group>
@@ -74,17 +74,18 @@
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="received" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="processing" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                              <Component id="accepted" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="rejected" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="accepted" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="rejected" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="received" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="processing" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -130,29 +131,44 @@
         <Property name="orientation" type="int" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="received">
+    <Component class="javax.swing.JButton" name="statSave">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Received"/>
+        <Property name="text" type="java.lang.String" value="SAVE"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="processing">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Processing"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="statSaveActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="accepted">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="responseStatus"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Accepted"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rejected">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="responseStatus"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Rejected"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="statSave">
+    <Component class="javax.swing.JRadioButton" name="received">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SAVE"/>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="appStatus"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Received"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="processing">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="appStatus"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Processing"/>
       </Properties>
     </Component>
   </SubComponents>

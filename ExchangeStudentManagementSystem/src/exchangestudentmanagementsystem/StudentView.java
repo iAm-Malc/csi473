@@ -48,12 +48,27 @@ public class StudentView extends javax.swing.JFrame {
         jLabel2.setText("Search for Program:");
 
         search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
 
         createApplication.setText("Create Application");
 
         editApplication.setText("Edit Application");
+        editApplication.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editApplicationActionPerformed(evt);
+            }
+        });
 
         checkAppStatus.setText("Check Application Status");
+        checkAppStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkAppStatusActionPerformed(evt);
+            }
+        });
 
         logout.setText("Logout");
         logout.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +142,21 @@ public class StudentView extends javax.swing.JFrame {
         new Home().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void checkAppStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAppStatusActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_checkAppStatusActionPerformed
+
+    private void editApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editApplicationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editApplicationActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        new DisplaySearchResults().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_searchActionPerformed
 
     /**
      * @param args the command line arguments
