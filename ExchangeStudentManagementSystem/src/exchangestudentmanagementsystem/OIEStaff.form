@@ -34,8 +34,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="updateProg" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="deleteProg" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="deactivateProg" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="activateProg" alignment="1" max="32767" attributes="0"/>
                                   <Component id="editProg" alignment="1" max="32767" attributes="0"/>
                                   <Component id="addProg" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -63,15 +63,15 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="addProg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="editProg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="deleteProg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="updateProg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="activateProg" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="deactivateProg" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
               <Component id="logout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -99,20 +99,26 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Program"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addProgActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="editProg">
       <Properties>
         <Property name="text" type="java.lang.String" value="Edit Program"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editProgActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="deleteProg">
+    <Component class="javax.swing.JButton" name="activateProg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete Program"/>
+        <Property name="text" type="java.lang.String" value="Activate Program"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="updateProg">
+    <Component class="javax.swing.JButton" name="deactivateProg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Update Program"/>
+        <Property name="text" type="java.lang.String" value="Deactivate Program"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="logout">
