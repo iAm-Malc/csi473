@@ -31,15 +31,16 @@ public class ApplicationStatus extends javax.swing.JFrame {
     private void initComponents() {
 
         responseStatus = new javax.swing.ButtonGroup();
+        appStatus = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         statSave = new javax.swing.JButton();
-        received = new javax.swing.JCheckBox();
-        processing = new javax.swing.JCheckBox();
         accepted = new javax.swing.JRadioButton();
         rejected = new javax.swing.JRadioButton();
+        received = new javax.swing.JRadioButton();
+        processing = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,20 +63,17 @@ public class ApplicationStatus extends javax.swing.JFrame {
             }
         });
 
-        received.setText("Received");
-        received.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                receivedActionPerformed(evt);
-            }
-        });
-
-        processing.setText("Processing");
-
         responseStatus.add(accepted);
         accepted.setText("Accepted");
 
         responseStatus.add(rejected);
         rejected.setText("Rejected");
+
+        appStatus.add(received);
+        received.setText("Received");
+
+        appStatus.add(processing);
+        processing.setText("Processing");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,16 +115,17 @@ public class ApplicationStatus extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(received)
-                                .addGap(47, 47, 47)
-                                .addComponent(processing))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
                                 .addComponent(accepted)
                                 .addGap(50, 50, 50)
-                                .addComponent(rejected))))
+                                .addComponent(rejected))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(received)
+                                .addGap(49, 49, 49)
+                                .addComponent(processing))))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(statSave)
@@ -140,10 +139,6 @@ public class ApplicationStatus extends javax.swing.JFrame {
     private void statSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statSaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_statSaveActionPerformed
-
-    private void receivedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receivedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_receivedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,12 +178,13 @@ public class ApplicationStatus extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton accepted;
+    private javax.swing.ButtonGroup appStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JCheckBox processing;
-    private javax.swing.JCheckBox received;
+    private javax.swing.JRadioButton processing;
+    private javax.swing.JRadioButton received;
     private javax.swing.JRadioButton rejected;
     private javax.swing.ButtonGroup responseStatus;
     private javax.swing.JButton statSave;
