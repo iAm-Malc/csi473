@@ -200,7 +200,7 @@ public class AddProgram extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProgramActionPerformed
-        // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_addProgramActionPerformed
 
     private void progNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_progNameActionPerformed
