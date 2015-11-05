@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author BT
  */
 public class StudentLogin extends javax.swing.JFrame {
-    PreparedStatement myPstmt = null;
+    Statement myPstmt = null;
     ResultSet myRs = null;
     Connection myConn = null;
     /**
@@ -63,6 +63,18 @@ public class StudentLogin extends javax.swing.JFrame {
 
         jLabel4.setText("Password:");
 
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
+
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +83,11 @@ public class StudentLogin extends javax.swing.JFrame {
         });
 
         register.setText("Don't have an accout? Register");
+        register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerActionPerformed(evt);
+            }
+        });
 
         cancel.setText("Cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -152,29 +169,52 @@ public class StudentLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        
+        String query = "SELECT * FROM csi473Student";
+        
         try {
-            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_sam02379","sam02379","engagement");  
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
             String user = username.getText();
             int username1 = Integer.parseInt(user);
-            String password1 = password.getText();
-            String query = "SELECT * FROM csi473ProjectStudent WHERE StudentId = ? and Password = ?";
-            myPstmt = myConn.prepareStatement(query);
-            myPstmt.setInt(1,username1);
-            myPstmt.setString(2, password1);
-            myRs = myPstmt.executeQuery();
-            if(myRs.next())
+            String password1 = new String (password.getPassword());
+            myPstmt = myConn.createStatement();
+            myRs = myPstmt.executeQuery(query);
+//            
+            while(myRs.next()){
+               int uname = myRs.getInt("StudentID");
+               String pword = myRs.getString("Password");
+               if((username1==uname) && (password1.equals(pword))){
+                   new StudentView().setVisible(true);
+                   dispose();
+               }
+               else
             {
-                JOptionPane.showMessageDialog(null,"Login Success.");
-                new StudentView().setVisible(true);
+                JOptionPane.showMessageDialog(null,"Invalid Username or Password, "
+                        + "Please Try Again");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Invalid username or password, please try again.");
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_passwordActionPerformed
+
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        // TODO add your handling code here:
+        new Register().setVisible(true);
+    }//GEN-LAST:event_registerActionPerformed
 
     /**
      * @param args the command line arguments
