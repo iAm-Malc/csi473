@@ -42,6 +42,11 @@ public class AdvisorView extends javax.swing.JFrame {
         jLabel1.setText("EXCHANGE STUDENT MANAGEMENT SYSTEM");
 
         reviewApp.setText("Review Application");
+        reviewApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reviewAppActionPerformed(evt);
+            }
+        });
 
         updateAppStat.setText("Update Application Status");
         updateAppStat.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +56,11 @@ public class AdvisorView extends javax.swing.JFrame {
         });
 
         logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,7 +76,7 @@ public class AdvisorView extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
+                        .addGap(133, 133, 133)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(updateAppStat)
                             .addComponent(reviewApp))))
@@ -80,11 +90,11 @@ public class AdvisorView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(reviewApp)
                 .addGap(34, 34, 34)
                 .addComponent(updateAppStat)
-                .addGap(61, 61, 61)
+                .addGap(78, 78, 78)
                 .addComponent(logout)
                 .addGap(37, 37, 37))
         );
@@ -95,7 +105,21 @@ public class AdvisorView extends javax.swing.JFrame {
 
     private void updateAppStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppStatActionPerformed
         // TODO add your handling code here:
+        new ApplicationStatus().setVisible(true);
+        dispose();
     }//GEN-LAST:event_updateAppStatActionPerformed
+
+    private void reviewAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewAppActionPerformed
+        // TODO add your handling code here:
+        new ReviewApplication().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_reviewAppActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+        new Home().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
