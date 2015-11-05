@@ -6,12 +6,24 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author BT
  */
 public class OIEAdvisorLogin extends javax.swing.JFrame {
+    
+    Statement myPstmt = null;
+    ResultSet myRs = null;
+    Connection myConn = null;
 
     /**
      * Creates new form OIEAdvisorLogin
@@ -129,6 +141,36 @@ public class OIEAdvisorLogin extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
+        String query = "SELECT * FROM csi473OIEAdvisor";
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+            String user = username.getText();
+            int username1 = Integer.parseInt(user);
+            String password1 = new String (password.getPassword());
+            myPstmt = myConn.createStatement();
+            myRs = myPstmt.executeQuery(query);
+//            
+            while(myRs.next()){
+               int uname = myRs.getInt("AdvisorID");
+               String pword = myRs.getString("Password");
+               if((username1==uname) && (password1.equals(pword))){
+                   new AdvisorView().setVisible(true);
+                   dispose();
+               }
+               else
+            {
+                JOptionPane.showMessageDialog(null,"Invalid Username or Password, "
+                        + "Please Try Again");
+            }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginActionPerformed
 
     /**
