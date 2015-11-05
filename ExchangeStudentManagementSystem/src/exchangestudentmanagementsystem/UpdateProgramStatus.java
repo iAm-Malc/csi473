@@ -5,17 +5,25 @@
  */
 package exchangestudentmanagementsystem;
 
+import java.awt.Color;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author BT
  */
 public class UpdateProgramStatus extends javax.swing.JFrame {
-
+    Statement myPstmt = null;
+    ResultSet myRs = null;
+    Connection myConn = null;
     /**
      * Creates new form UpdateProgramStatus
      */
     public UpdateProgramStatus() {
         initComponents();
+        getContentPane().setBackground(new Color(51,204,255));
     }
 
     /**
@@ -49,6 +57,11 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
         activate.setText("Activate");
 
         deactivate.setText("Deactivate");
+        deactivate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deactivateActionPerformed(evt);
+            }
+        });
 
         back.setText("Back");
 
@@ -104,6 +117,34 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void deactivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deactivateActionPerformed
+        String query = "SELECT * FROM csi473Program";
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+            String pCode = progCode.getText();
+            myPstmt = myConn.createStatement();
+            myRs = myPstmt.executeQuery(query);
+//            
+            while(myRs.next()){
+               String program_code = myRs.getString("ProgramCode");
+               String status = myRs.getString("Status");
+               if(pCode.equals(program_code) && (status.equals("active"))){
+                   String query1 = "UPDATE csi473Program SET Status='inactive'";
+                   JOptionPane.showMessageDialog(null,"Program Deactivated");
+               }
+               else
+            {
+                JOptionPane.showMessageDialog(null,"Program not Active");
+            }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UpdateProgramStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_deactivateActionPerformed
 
     /**
      * @param args the command line arguments
