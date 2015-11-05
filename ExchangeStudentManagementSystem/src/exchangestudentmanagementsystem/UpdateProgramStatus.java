@@ -52,7 +52,7 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel1.setText("EXCHANGE STUDENT MANAGEMENT SYSTEM");
 
-        jLabel2.setText("Program Code:");
+        jLabel2.setText("Program Code (e.g BSc205):");
 
         activate.setText("Activate");
 
