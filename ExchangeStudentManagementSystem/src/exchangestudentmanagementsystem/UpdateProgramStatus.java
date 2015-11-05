@@ -55,6 +55,11 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
         jLabel2.setText("Program Code (e.g BSc205):");
 
         activate.setText("Activate");
+        activate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activateActionPerformed(evt);
+            }
+        });
 
         deactivate.setText("Deactivate");
         deactivate.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +69,11 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
         });
 
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("UPDATE PROGRAM  STATUS");
@@ -78,11 +88,11 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(progCode, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(50, 50, 50))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -145,6 +155,39 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
             Logger.getLogger(UpdateProgramStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_deactivateActionPerformed
+
+    private void activateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateActionPerformed
+        String query = "SELECT * FROM csi473Program";
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+            String pCode = progCode.getText();
+            myPstmt = myConn.createStatement();
+            myRs = myPstmt.executeQuery(query);
+//            
+            while(myRs.next()){
+               String program_code = myRs.getString("ProgramCode");
+               String status = myRs.getString("Status");
+               if(pCode.equals(program_code) && (status.equals("inactive"))){
+                   String query1 = "UPDATE csi473Program SET Status='active'";
+                   JOptionPane.showMessageDialog(null,"Program Activated");
+               }
+               else
+            {
+                JOptionPane.showMessageDialog(null,"Program Already Active");
+            }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UpdateProgramStatus.class.getName()).log(Level.SEVERE, null, ex);
+        }    // TODO add your handling code here:
+    }//GEN-LAST:event_activateActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        new OIEStaff().setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
