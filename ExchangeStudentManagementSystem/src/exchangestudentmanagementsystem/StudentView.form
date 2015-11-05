@@ -100,6 +100,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="createApplication">
       <Properties>
@@ -110,11 +113,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Edit Application"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editApplicationActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="checkAppStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Check Application Status"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkAppStatusActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logout">
       <Properties>
