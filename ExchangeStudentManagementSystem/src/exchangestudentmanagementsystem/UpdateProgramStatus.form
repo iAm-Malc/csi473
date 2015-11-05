@@ -99,7 +99,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Program Code:"/>
+        <Property name="text" type="java.lang.String" value="Program Code (e.g BSc205):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="progCode">

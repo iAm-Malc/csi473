@@ -35,7 +35,6 @@ public class OIEStaff extends javax.swing.JFrame {
         addProg = new javax.swing.JButton();
         editProg = new javax.swing.JButton();
         activateProg = new javax.swing.JButton();
-        deactivateProg = new javax.swing.JButton();
         logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +43,7 @@ public class OIEStaff extends javax.swing.JFrame {
         jLabel1.setText("EXCHANGE STUDENT MANAGEMENT SYSTEM");
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel2.setText("OIE Staff");
+        jLabel2.setText("OIE STAFF");
 
         addProg.setText("Add Program");
         addProg.addActionListener(new java.awt.event.ActionListener() {
@@ -60,9 +59,12 @@ public class OIEStaff extends javax.swing.JFrame {
             }
         });
 
-        activateProg.setText("Activate Program");
-
-        deactivateProg.setText("Deactivate Program");
+        activateProg.setText("Update Program Status");
+        activateProg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activateProgActionPerformed(evt);
+            }
+        });
 
         logout.setText("Logout");
 
@@ -72,26 +74,26 @@ public class OIEStaff extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(logout))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel1))
+                                .addGap(142, 142, 142)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addProg, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(editProg, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(activateProg)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(153, 153, 153)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(deactivateProg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(activateProg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(editProg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(addProg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addComponent(jLabel2)))))
-                        .addGap(0, 73, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(logout)))
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 48, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,20 +102,19 @@ public class OIEStaff extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(41, 41, 41)
+                .addGap(49, 49, 49)
                 .addComponent(addProg)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(editProg)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(activateProg)
-                .addGap(18, 18, 18)
-                .addComponent(deactivateProg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(logout)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProgActionPerformed
@@ -127,6 +128,12 @@ public class OIEStaff extends javax.swing.JFrame {
         new EditProgramForm().setVisible(true);
         dispose();
     }//GEN-LAST:event_editProgActionPerformed
+
+    private void activateProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateProgActionPerformed
+        // TODO add your handling code here:
+        new UpdateProgramStatus().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_activateProgActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,7 +174,6 @@ public class OIEStaff extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton activateProg;
     private javax.swing.JButton addProg;
-    private javax.swing.JButton deactivateProg;
     private javax.swing.JButton editProg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
