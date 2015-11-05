@@ -144,7 +144,10 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
                String status = myRs.getString("Status");
                if(pCode.equals(program_code) && (status.equals("active"))){
                    String query1 = "UPDATE csi473Program SET Status='inactive'";
+                   PreparedStatement myPstmt1 = myConn.prepareStatement(query1);
+                   myPstmt1.executeUpdate();
                    JOptionPane.showMessageDialog(null,"Program Deactivated");
+                   break;
                }
                else
             {
@@ -172,7 +175,10 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
                String status = myRs.getString("Status");
                if(pCode.equals(program_code) && (status.equals("inactive"))){
                    String query1 = "UPDATE csi473Program SET Status='active'";
+                   PreparedStatement myPstmt1 = myConn.prepareStatement(query1);
+                   myPstmt1.executeUpdate();
                    JOptionPane.showMessageDialog(null,"Program Activated");
+                   break;
                }
                else
             {
