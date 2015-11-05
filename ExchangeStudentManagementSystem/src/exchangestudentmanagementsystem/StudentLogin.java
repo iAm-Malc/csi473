@@ -153,10 +153,15 @@ public class StudentLogin extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_sam02379","sam02379","engagement");  
             String user = username.getText();
             int username1 = Integer.parseInt(user);
-            String password1 = password.getText();
+            String password1 = new String(password.getPassword());
             String query = "SELECT * FROM csi473ProjectStudent WHERE StudentId = ? and Password = ?";
             myPstmt = myConn.prepareStatement(query);
             myPstmt.setInt(1,username1);
