@@ -55,16 +55,11 @@
                                   <Component id="jLabel9" linkSize="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="regConPass" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="regStudID" alignment="0" pref="254" max="32767" attributes="0"/>
-                                          <Component id="regPass" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="regStudID" alignment="0" pref="302" max="32767" attributes="0"/>
+                                  <Component id="regPass" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="regConPass" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -74,12 +69,12 @@
                                   <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="regsName" max="32767" attributes="0"/>
                                   <Component id="regfName" max="32767" attributes="0"/>
-                                  <Component id="regPost" max="32767" attributes="0"/>
-                                  <Component id="regDOB" max="32767" attributes="0"/>
+                                  <Component id="regPost" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="regDOB" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -111,7 +106,7 @@
                   </Group>
                   <Component id="regAge" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
