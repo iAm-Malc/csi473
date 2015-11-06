@@ -76,7 +76,7 @@ public class Register extends javax.swing.JFrame {
 
         jLabel2.setText("First Name:");
 
-        jLabel3.setText("Date of Birth:");
+        jLabel3.setText("Date of Birth(yyyy/mm/dd):");
 
         jLabel4.setText("Postal Address:");
 
