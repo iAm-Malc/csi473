@@ -376,7 +376,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
                int age= thisYears - doY;
                //String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO csi473Application(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                PreparedStatement pstmt = myConn.prepareStatement(sql);
             pstmt.setString(1,fulName);
             pstmt.setString(2, pCode);
