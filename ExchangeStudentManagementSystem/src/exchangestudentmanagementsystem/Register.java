@@ -316,6 +316,7 @@ public class Register extends javax.swing.JFrame {
       pstmt.setString(8, password);
       if (password.equals(regConPass.getText())){
             pstmt.executeUpdate();
+            dispose();
       }else{
           JOptionPane.showMessageDialog(null,"Passwords don't match, "
                         + "Please Try Again");
