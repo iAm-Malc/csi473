@@ -363,7 +363,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                
                String postal = myRs.getString("PostalAddress");;
                String gender = myRs.getString("Gender");
-               String fulName = fname +""+lname;
+               String fulName = fname +" "+lname;
                String fieldOfStudy = createAppFOS.getText();
                String levelOfStudy = createAppLOS.getText();
                String motivationalLetter = createAppMotivLetter.getText();
