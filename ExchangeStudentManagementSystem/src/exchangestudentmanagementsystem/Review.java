@@ -10,7 +10,7 @@ package exchangestudentmanagementsystem;
  * @author BT
  */
 public class Review extends javax.swing.JFrame {
-     String gender = "";
+     String reviewGender = "";
      String program = "";
     /**
      * Creates new form Review
@@ -300,13 +300,13 @@ public class Review extends javax.swing.JFrame {
 
     private void createAppMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppMaleActionPerformed
         createAppMale.setActionCommand("male");
-        gender = "M";// TODO add your handling code here:
+        reviewGender = "M";// TODO add your handling code here:
 
     }//GEN-LAST:event_createAppMaleActionPerformed
 
     private void createAppFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppFemaleActionPerformed
         createAppFemale.setActionCommand("female");
-        gender = "F"; // TODO add your handling code here:
+        reviewGender = "F"; // TODO add your handling code here:
     }//GEN-LAST:event_createAppFemaleActionPerformed
 
     private void updateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStatusActionPerformed
