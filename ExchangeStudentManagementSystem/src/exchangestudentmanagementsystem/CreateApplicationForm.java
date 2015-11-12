@@ -68,11 +68,6 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                createAppDOB.setText(dob.toString());
                createAppStudID.setText(String.valueOf(userName));
                createAppPostAddr.setText(postal);
-//               if(gender.equals("M")){
-//                   createAppMaleActionPerformed(evt);
-//               }else{
-//                   createAppFemaleActionPerformed(evt);
-//               }
 }
         } catch (SQLException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -378,7 +373,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
             Connection myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
             int username1 = Constants.usernameOnline;
-            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`=";//+username1;
+            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
            Statement myPstmt = myConn.prepareStatement(query);
            ResultSet myRs = myPstmt.executeQuery(query);
 //            
