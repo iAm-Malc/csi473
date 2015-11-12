@@ -40,6 +40,14 @@ public class CreateApplicationForm extends javax.swing.JFrame {
             String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
            Statement myPstmt = myConn.prepareStatement(query);
            ResultSet myRs = myPstmt.executeQuery(query);
+           
+           Statement programs = myConn.createStatement();
+           String progs = "SELECT ProgramCode FROM csi473Program";
+           ResultSet rs = programs.executeQuery(progs);
+           while(rs.next())
+           {
+               createAppProgram.addItem(rs.getString("ProgramCode"));
+           }
 //            
             while(myRs.next()){
                int userName = myRs.getInt("StudentID");
@@ -173,7 +181,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
 
         jLabel16.setText("Motivational Letter (not more than 200 words:)");
 
-        createAppProgram.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        createAppProgram.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Program ..." }));
         createAppProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createAppProgramActionPerformed(evt);
