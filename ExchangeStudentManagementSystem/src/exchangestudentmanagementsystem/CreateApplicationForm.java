@@ -394,6 +394,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                //String sql = "INSERT INTO csi473Application(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                PreparedStatement pstmt = myConn.prepareStatement(sql);
+               Statement stmt = myConn.createStatement();
             pstmt.setString(1,fulName);
             pstmt.setString(2, pCode);
             pstmt.setInt(3, age);
@@ -407,7 +408,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
             pstmt.setString(11, levelOfStudy);
             pstmt.setString(12, motivationalLetter);
             pstmt.setString(13, status);
-            pstmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
 }
         } catch (SQLException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
