@@ -175,7 +175,8 @@ public class ReviewApplication extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void reviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewActionPerformed
-        
+        new Review().setVisible(true);
+        dispose();
     }//GEN-LAST:event_reviewActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
