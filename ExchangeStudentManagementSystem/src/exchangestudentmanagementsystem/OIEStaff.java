@@ -68,6 +68,11 @@ public class OIEStaff extends javax.swing.JFrame {
         });
 
         logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exchangestudentmanagementsystem/UB-logo.png"))); // NOI18N
 
@@ -85,8 +90,7 @@ public class OIEStaff extends javax.swing.JFrame {
                             .addComponent(activateProg)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(36, 36, 36)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel2)))
                         .addGap(64, 64, 64)
                         .addComponent(logout))
                     .addGroup(layout.createSequentialGroup()
@@ -143,6 +147,11 @@ public class OIEStaff extends javax.swing.JFrame {
         new UpdateProgramStatus().setVisible(true);
         dispose();
     }//GEN-LAST:event_activateProgActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        new Home().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments

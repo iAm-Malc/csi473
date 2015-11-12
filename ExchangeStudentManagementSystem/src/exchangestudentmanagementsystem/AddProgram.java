@@ -216,9 +216,7 @@ public class AddProgram extends javax.swing.JFrame {
     private void addProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProgramActionPerformed
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
-                   "kii03486","kii03486"); 
-            System.out.println("Connected database successfully...");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486","kii03486","kii03486"); 
             myPstmt = myConn.createStatement();
             String name = progName.getText();
             String code = progCode.getText();
