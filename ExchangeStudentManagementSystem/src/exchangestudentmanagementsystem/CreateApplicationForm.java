@@ -378,7 +378,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
             Connection myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
             int username1 = Constants.usernameOnline;
-            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
+            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`=";//+username1;
            Statement myPstmt = myConn.prepareStatement(query);
            ResultSet myRs = myPstmt.executeQuery(query);
 //            
