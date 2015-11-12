@@ -157,27 +157,24 @@ public class OIEAdvisorLogin extends javax.swing.JFrame {
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
             String user = username.getText();
-            int username1 = Integer.parseInt(user);
             String password1 = new String (password.getPassword());
             myPstmt = myConn.createStatement();
             myRs = myPstmt.executeQuery(query);
 //            
             while(myRs.next()){
-               int uname = myRs.getInt("AdvisorID");
-               String pword = myRs.getString("Password");
-               if((username1==uname) && (password1.equals(pword))){
+               String uname = myRs.getString("AdvisorID");
+               String pword = myRs.getString("universityPassword");
+               if(user.equals(uname) && (password1.equals(pword))){
                    new AdvisorView().setVisible(true);
                    dispose();
                }
                else
-            {
-                JOptionPane.showMessageDialog(null,"Invalid Username or Password, "
-                        + "Please Try Again");
+               {
+                   JOptionPane.showMessageDialog(null,"Invalid Username or Password, "
+                           + "Please Try Again");
+               }
             }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginActionPerformed
