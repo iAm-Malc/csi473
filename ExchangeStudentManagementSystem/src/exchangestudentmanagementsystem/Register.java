@@ -6,6 +6,7 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -320,11 +321,7 @@ public class Register extends javax.swing.JFrame {
              }
 
    }catch(SQLException se){
-      //Handle errors for JDBC
-      se.printStackTrace();
-   }catch(Exception e){
-      //Handle errors for Class.forName
-      e.printStackTrace();
+   }catch(ClassNotFoundException | NumberFormatException | HeadlessException e){
    }finally{
       //finally block used to close resources
       try{
@@ -338,7 +335,6 @@ public class Register extends javax.swing.JFrame {
          this.setVisible(false);
          
       }catch(SQLException se){
-         se.printStackTrace();
       }//end finally try
       
    }

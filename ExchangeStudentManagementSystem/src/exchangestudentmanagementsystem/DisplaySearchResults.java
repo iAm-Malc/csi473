@@ -7,7 +7,6 @@ package exchangestudentmanagementsystem;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -161,7 +160,12 @@ public class DisplaySearchResults extends javax.swing.JFrame {
             String sql = "SELECT * FROM csi473Program WHERE ProgramCode='"+criteria+"' OR ProgramTitle='"+criteria+"' OR HostUniversity='"+criteria+"' OR Status='"+criteria+"'";    
             myPstmt = myConn.prepareStatement(sql);
             myRs = myPstmt.executeQuery(sql);
-            searchResults.setModel(DbUtils.resultSetToTableModel(myRs));
+            if(myRs.next()){
+                searchResults.setModel(DbUtils.resultSetToTableModel(myRs));
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Program not found. ");
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
