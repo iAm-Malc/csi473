@@ -4,15 +4,26 @@
  * and open the template in the editor.
  */
 package exchangestudentmanagementsystem;
-
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author Malcolm
  */
 public class AddProgram extends javax.swing.JFrame {
-
+    Statement myPstmt = null;
+    ResultSet myRs = null;
+    Connection myConn = null;
     /**
      * Creates new form newAddProgram
      */
@@ -50,6 +61,7 @@ public class AddProgram extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         noOfCredits = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,34 +86,23 @@ public class AddProgram extends javax.swing.JFrame {
 
         jLabel9.setText("End Date:");
 
-        addProgram.setText("ADD");
+        addProgram.setText("Add");
         addProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addProgramActionPerformed(evt);
             }
         });
 
-        progName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                progNameActionPerformed(evt);
-            }
-        });
-
-        hostInst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hostInstActionPerformed(evt);
-            }
-        });
-
-        endDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endDateActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("Number of Credits:");
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exchangestudentmanagementsystem/UB-logo.png"))); // NOI18N
+
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +121,9 @@ public class AddProgram extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(noOfCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(215, 215, 215)
-                                .addComponent(addProgram))
+                                .addComponent(addProgram)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -146,7 +149,7 @@ public class AddProgram extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {beginDate, duration, endDate, hostCountry, hostInst, progCode, progName});
@@ -194,14 +197,16 @@ public class AddProgram extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addProgram)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addProgram)
+                            .addComponent(cancel))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(noOfCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
 
         pack();
@@ -209,20 +214,40 @@ public class AddProgram extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProgramActionPerformed
-                // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                   "kii03486","kii03486"); 
+            System.out.println("Connected database successfully...");
+            myPstmt = myConn.createStatement();
+            String name = progName.getText();
+            String code = progCode.getText();
+            int progDuration = Integer.parseInt(duration.getText());
+            String hostCntry = hostCountry.getText();
+            String institution = hostInst.getText();
+            String begin = beginDate.getText();
+            String end = endDate.getText();
+            int credits = Integer.parseInt(noOfCredits.getText());
+            String sql = "INSERT INTO csi473Program(ProgramCode, ProgramTitle, Duration, HostUniversity, StartDate, EndDate, Credits,Status) VALUES (?,?,?,?,?,?,?,?,'inactive')";
+            PreparedStatement pstmt = myConn.prepareStatement(sql);
+            pstmt.setString(1, code);
+            pstmt.setString(2, name);
+            pstmt.setInt(3, progDuration);
+            pstmt.setString(4, institution);
+            pstmt.setString(5, hostCntry);
+            pstmt.setString(6, begin);
+            pstmt.setString(7, end);
+            pstmt.setInt(8, credits);
+            pstmt.executeUpdate();
+        }catch(SQLException se){
+        }catch(ClassNotFoundException | NumberFormatException e){
+        }
     }//GEN-LAST:event_addProgramActionPerformed
 
-    private void progNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_progNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_progNameActionPerformed
-
-    private void hostInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hostInstActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hostInstActionPerformed
-
-    private void endDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_endDateActionPerformed
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        new OIEStaff().setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_cancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +288,7 @@ public class AddProgram extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProgram;
     private javax.swing.JTextField beginDate;
+    private javax.swing.JButton cancel;
     private javax.swing.JTextField duration;
     private javax.swing.JTextField endDate;
     private javax.swing.JTextField hostCountry;
