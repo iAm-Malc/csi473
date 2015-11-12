@@ -64,7 +64,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
                int age= thisYears - doY;
                
-               createAppName.setText(fname+""+lname);
+               createAppName.setText(fname+" "+lname);
                createAppDOB.setText(dob.toString());
                createAppStudID.setText(String.valueOf(userName));
                createAppPostAddr.setText(postal);
@@ -388,7 +388,6 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                String lname = myRs.getString("LastName");
                int credits = myRs.getInt("CreditsTaken");
                Date dob = myRs.getDate("DOB");
-               System.out.println(dob);
                String hostCountry = createAppHostCountry.getText();
                String hostInstitution = createAppHostInst.getText();
                
