@@ -165,7 +165,7 @@ public class OIEAdvisorLogin extends javax.swing.JFrame {
                String uname = myRs.getString("AdvisorID");
                String pword = myRs.getString("universityPassword");
                if(user.equals(uname) && (password1.equals(pword))){
-                   new AdvisorView().setVisible(true);
+                   new ReviewApplication().setVisible(true);
                    dispose();
                }
                else
