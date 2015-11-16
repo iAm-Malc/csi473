@@ -69,9 +69,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                createAppStudID.setText(String.valueOf(userName));
                createAppPostAddr.setText(postal);
 }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
