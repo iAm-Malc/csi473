@@ -6,12 +6,24 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Malcolm
  */
 public class EditProgramForm extends javax.swing.JFrame {
+    Connection myConn = null;
+     Statement myPstmt = null;
+     ResultSet myRs = null;
 
     /**
      * Creates new form newEditProgramForm
@@ -20,7 +32,38 @@ public class EditProgramForm extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new Color(51,204,255));
         
-        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+            int programCode = Constants.reviewApplicationId;
+            String query = "SELECT * FROM `csi473Program` WHERE `ProgramCode`="+programCode;
+            myPstmt = myConn.prepareStatement(query);
+            myRs = myPstmt.executeQuery(query);
+           
+//            
+            while(myRs.next()){
+               String progCode = myRs.getString("ProgramCode");
+               String progTitle = myRs.getString("ProgramTitle");
+               int duration = myRs.getInt("Duration");
+               String hostUni = myRs.getString("HostUniversity");
+               String hostCntry = myRs.getString("HostCountry");
+               Date startDate = myRs.getDate("StartDate");
+               Date endDate = myRs.getDate("EndDate");
+               int credits = myRs.getInt("Credits");
+               
+               progName.setText(progTitle);
+               editProgCode.setText(progCode);
+               progDuration.setText(String.valueOf(duration));
+               hostCountry.setText(hostCntry);
+               hostInst.setText(hostUni);
+               beginDate.setText(startDate.toString());
+               editEndDate.setText(endDate.toString());
+               noOfCredits.setText(String.valueOf(credits));
+    }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -32,12 +75,12 @@ public class EditProgramForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        editProgram = new javax.swing.JButton();
+        updateProgram = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        progCode = new javax.swing.JTextField();
+        editProgCode = new javax.swing.JTextField();
         progName = new javax.swing.JTextField();
         hostCountry = new javax.swing.JTextField();
-        duration = new javax.swing.JTextField();
+        progDuration = new javax.swing.JTextField();
         hostInst = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -46,7 +89,7 @@ public class EditProgramForm extends javax.swing.JFrame {
         beginDate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        endDate = new javax.swing.JTextField();
+        editEndDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         noOfCredits = new javax.swing.JTextField();
@@ -56,7 +99,12 @@ public class EditProgramForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editProgram.setText("Update");
+        updateProgram.setText("Update");
+        updateProgram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProgramActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("End Date:");
 
@@ -125,7 +173,7 @@ public class EditProgramForm extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(progCode))
+                                    .addComponent(editProgCode))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,15 +182,15 @@ public class EditProgramForm extends javax.swing.JFrame {
                                         .addComponent(jLabel3))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(duration, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(progDuration, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(editEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(progName, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))))))
                 .addContainerGap(110, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(editProgram)
+                        .addComponent(updateProgram)
                         .addGap(18, 18, 18)
                         .addComponent(editProgCancel)
                         .addGap(22, 22, 22))
@@ -155,11 +203,11 @@ public class EditProgramForm extends javax.swing.JFrame {
                         .addGap(50, 50, 50))))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {beginDate, duration, endDate, hostCountry, hostInst, progCode, progName});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {beginDate, editEndDate, editProgCode, hostCountry, hostInst, progDuration, progName});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8, jLabel9});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {editProgCancel, editProgram});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {editProgCancel, updateProgram});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,11 +223,11 @@ public class EditProgramForm extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(progCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editProgCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(progDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,7 +243,7 @@ public class EditProgramForm extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -203,12 +251,12 @@ public class EditProgramForm extends javax.swing.JFrame {
                     .addComponent(noOfCredits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editProgram)
+                    .addComponent(updateProgram)
                     .addComponent(editProgCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {beginDate, duration, endDate, hostCountry, hostInst, noOfCredits, progCode, progName});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {beginDate, editEndDate, editProgCode, hostCountry, hostInst, noOfCredits, progDuration, progName});
 
         pack();
         setLocationRelativeTo(null);
@@ -219,6 +267,25 @@ public class EditProgramForm extends javax.swing.JFrame {
         new OIEStaff().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editProgCancelActionPerformed
+
+    private void updateProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProgramActionPerformed
+        // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+            int appId = Constants.reviewApplicationId;
+            String query = "UPDATE `csi473Program` SET `Status`='Processing' WHERE  `ApplicationNumber`="+appId;
+            myPstmt = myConn.prepareStatement(query);
+            myPstmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(null,"Saved.");
+            new ReviewApplication().setVisible(true);        
+            dispose();
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EditProgramForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_updateProgramActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,10 +325,9 @@ public class EditProgramForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField beginDate;
-    private javax.swing.JTextField duration;
+    private javax.swing.JTextField editEndDate;
     private javax.swing.JButton editProgCancel;
-    private javax.swing.JButton editProgram;
-    private javax.swing.JTextField endDate;
+    private javax.swing.JTextField editProgCode;
     private javax.swing.JTextField hostCountry;
     private javax.swing.JTextField hostInst;
     private javax.swing.JLabel jLabel1;
@@ -276,7 +342,8 @@ public class EditProgramForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField noOfCredits;
-    private javax.swing.JTextField progCode;
+    private javax.swing.JTextField progDuration;
     private javax.swing.JTextField progName;
+    private javax.swing.JButton updateProgram;
     // End of variables declaration//GEN-END:variables
 }
