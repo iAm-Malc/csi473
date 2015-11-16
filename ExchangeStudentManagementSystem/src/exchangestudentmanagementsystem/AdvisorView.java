@@ -121,7 +121,7 @@ public class AdvisorView extends javax.swing.JFrame {
 
     private void updateAppStatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppStatActionPerformed
         // TODO add your handling code here:
-        new ApplicationStatus().setVisible(true);
+        new ReviewApplication().setVisible(true);
         dispose();
     }//GEN-LAST:event_updateAppStatActionPerformed
 
