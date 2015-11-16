@@ -278,7 +278,7 @@ public class EditProgramForm extends javax.swing.JFrame {
             String query = "UPDATE `csi473Program` WHERE `ProgramCode`="+programCode;
             myPstmt = myConn.prepareStatement(query);
             myPstmt.executeUpdate(query);
-            JOptionPane.showMessageDialog(null,"Program Has Been Updated");
+            JOptionPane.showMessageDialog(null,"Program Has Been Updated!");
             new ReviewApplication().setVisible(true);        
             dispose();
             
