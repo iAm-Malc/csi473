@@ -203,7 +203,7 @@ public class ApplicationStatus extends javax.swing.JFrame {
     }//GEN-LAST:event_statSaveActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        new AdvisorView().setVisible(true);        // TODO add your handling code here:
+        new ReviewApplication().setVisible(true);        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_backActionPerformed
 

@@ -140,7 +140,8 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_checkAppStatusActionPerformed
 
     private void editApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editApplicationActionPerformed
-        // TODO add your handling code here:
+        new EditApplication().setVisible(true);
+        dispose();
     }//GEN-LAST:event_editApplicationActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed

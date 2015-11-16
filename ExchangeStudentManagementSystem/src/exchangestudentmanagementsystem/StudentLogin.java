@@ -182,7 +182,6 @@ public class StudentLogin extends javax.swing.JFrame {
             String password1 = new String (password.getPassword());
             String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
             myPstmt = myConn.prepareStatement(query);
-            // pstmt.setInt(1, username1);
             myRs = myPstmt.executeQuery(query);
 //            
             while(myRs.next()){

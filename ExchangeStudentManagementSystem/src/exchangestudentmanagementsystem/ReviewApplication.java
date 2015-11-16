@@ -64,7 +64,7 @@ public class ReviewApplication extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         review = new javax.swing.JButton();
-        Back = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         applicationId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -114,10 +114,10 @@ public class ReviewApplication extends javax.swing.JFrame {
             }
         });
 
-        Back.setText("Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
+        logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
+                logoutActionPerformed(evt);
             }
         });
 
@@ -140,7 +140,7 @@ public class ReviewApplication extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Back)
+                        .addComponent(logout)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -187,7 +187,7 @@ public class ReviewApplication extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(review)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(Back)
+                .addComponent(logout)
                 .addContainerGap())
         );
 
@@ -200,10 +200,10 @@ public class ReviewApplication extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_reviewActionPerformed
 
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        new AdvisorView().setVisible(true);        
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        new Home().setVisible(true);        
         dispose();
-    }//GEN-LAST:event_BackActionPerformed
+    }//GEN-LAST:event_logoutActionPerformed
 
     private void applicationsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applicationsTableMouseClicked
         String appId = applicationsTable.getValueAt(applicationsTable.getSelectedRow(), 0).toString();
@@ -253,7 +253,6 @@ public class ReviewApplication extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
     private javax.swing.JTextField applicationId;
     private javax.swing.JTable applicationsTable;
     private javax.swing.JLabel jLabel1;
@@ -261,6 +260,7 @@ public class ReviewApplication extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logout;
     private javax.swing.JButton review;
     private javax.swing.JButton updatestatus;
     // End of variables declaration//GEN-END:variables

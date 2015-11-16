@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package exchangestudentmanagementsystem;
+
 import java.util.Date;
 import java.awt.Color;
 import java.sql.Connection;
@@ -19,77 +20,97 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Malcolm
+ * @author BT
  */
-public class CreateApplicationForm extends javax.swing.JFrame {
-    String createAppGender = "";
-    String program = "";
+public class EditApplication extends javax.swing.JFrame {
+    private String program;
+    private String createAppGender;
+    Connection myConn = null;
+    Statement myPstmt = null;
+    ResultSet myRs = null;
+
     /**
-     * Creates new form newApplicationForm
+     * Creates new form EditApplication
      */
-    public CreateApplicationForm() {
+    public EditApplication() {
         initComponents();
         getContentPane().setBackground(new Color(51,204,255));
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
-            int username1 = Constants.usernameOnline;
-            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
-           Statement myPstmt = myConn.prepareStatement(query);
-           ResultSet myRs = myPstmt.executeQuery(query);
+            int user = Constants.usernameOnline;
+            String query = "SELECT * FROM `csi473Application` WHERE `StudentID`="+user;
+            myPstmt = myConn.prepareStatement(query);
+            myRs = myPstmt.executeQuery(query);
            
-           Statement programs = myConn.createStatement();
-           String progs = "SELECT ProgramCode FROM csi473Program";
-           ResultSet rs = programs.executeQuery(progs);
-           while(rs.next())
-           {
-               createAppProgram.addItem(rs.getString("ProgramCode"));
-           }
+            Statement programs = myConn.createStatement();
+            String progs = "SELECT ProgramCode FROM csi473Program";
+            ResultSet rs = programs.executeQuery(progs);
+            
+            while(rs.next())
+            {
+                createAppProgram.addItem(rs.getString("ProgramCode"));
+            }
 //            
             while(myRs.next()){
-               int userName = myRs.getInt("StudentID");
-               String fname = myRs.getString("FirstName");
-               String lname = myRs.getString("LastName");
-               int credits = myRs.getInt("CreditsTaken");
+               String Name = myRs.getString("Name");
+               String reviewprogram = myRs.getString("ProgramCode");
+               String age = myRs.getString("Age");
+               String reviewgender = myRs.getString("Gender");
                Date dob = myRs.getDate("DOB");
-               String postal = myRs.getString("PostalAddress");
-               String createGender = myRs.getString("Gender");
-               String thisYear = new SimpleDateFormat("yyyy").format(new Date());
+               int studentID = myRs.getInt("StudentID");
+               String addr = myRs.getString("PostalAddress");
+               String hostCntry = myRs.getString("HostCountry");
+               String hostInst = myRs.getString("HostUniversity");
+               String fos = myRs.getString("FieldOfStudy");
+               String los = myRs.getString("LevelOfStudy");
+               String motiv = myRs.getString("MotivationalLetter");
                
-               int thisYears = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
-               int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
-               //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
-               int age= thisYears - doY;
-               
-               createAppName.setText(fname+" "+lname);
+               createAppName.setText(Name);
                createAppDOB.setText(dob.toString());
-               createAppStudID.setText(String.valueOf(userName));
-               createAppPostAddr.setText(postal);
-}
+               createAppStudID.setText(String.valueOf(studentID));
+               createAppPostAddr.setText(addr);
+               createAppAge.setText(String.valueOf(age));
+               createAppProgram.setSelectedItem(reviewprogram);
+               if (reviewgender.equals("M") ){
+                   createAppMale.setSelected(true); 
+               } 
+               else {
+                    createAppFemale.setSelected(true); 
+               } 
+               createAppHostCountry.setText(hostCntry);
+               createAppHostInst.setText(hostInst);
+               createAppFOS.setText(fos);
+               createAppLOS.setText(los);
+               createAppMotivLetter.setText(motiv);
+    }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gender = new javax.swing.ButtonGroup();
+        createAppHostInst = new javax.swing.JTextField();
+        createAppHostCountry = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        createAppFOS = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        createAppLOS = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        createAppProgram = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         createAppName = new javax.swing.JTextField();
         createAppAge = new javax.swing.JTextField();
         createAppStudID = new javax.swing.JTextField();
@@ -102,19 +123,10 @@ public class CreateApplicationForm extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        createAppHostInst = new javax.swing.JTextField();
-        createAppHostCountry = new javax.swing.JTextField();
-        createAppFOS = new javax.swing.JTextField();
-        createAppLOS = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        createAppProgram = new javax.swing.JComboBox();
-        createAppSubmit = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        cancel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         createAppMotivLetter = new javax.swing.JTextArea();
+        cancel = new javax.swing.JButton();
+        createAppSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,19 +138,34 @@ public class CreateApplicationForm extends javax.swing.JFrame {
 
         jLabel3.setText("Name:");
 
+        jLabel14.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel14.setText("EXCHANGE PROGRAM");
+
         jLabel4.setText("DOB:");
+
+        jLabel15.setText("Select Program:");
 
         jLabel5.setText("Age:");
 
+        jLabel16.setText("Motivational Letter (not more than 200 words:)");
+
         jLabel6.setText("Student ID:");
+
+        createAppProgram.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Program ..." }));
+        createAppProgram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAppProgramActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Postal Address:");
 
         jLabel8.setText("Gender:");
 
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exchangestudentmanagementsystem/UB-logo.png"))); // NOI18N
+
         createAppAge.setText(" ");
 
-        gender.add(createAppMale);
         createAppMale.setText("M");
         createAppMale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +173,6 @@ public class CreateApplicationForm extends javax.swing.JFrame {
             }
         });
 
-        gender.add(createAppFemale);
         createAppFemale.setText("F");
         createAppFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,17 +191,14 @@ public class CreateApplicationForm extends javax.swing.JFrame {
 
         jLabel13.setText("Level of Study:");
 
-        jLabel14.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel14.setText("EXCHANGE PROGRAM");
+        createAppMotivLetter.setColumns(20);
+        createAppMotivLetter.setRows(5);
+        jScrollPane1.setViewportView(createAppMotivLetter);
 
-        jLabel15.setText("Select Program:");
-
-        jLabel16.setText("Motivational Letter (not more than 200 words:)");
-
-        createAppProgram.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Program ..." }));
-        createAppProgram.addActionListener(new java.awt.event.ActionListener() {
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createAppProgramActionPerformed(evt);
+                cancelActionPerformed(evt);
             }
         });
 
@@ -185,19 +208,6 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                 createAppSubmitActionPerformed(evt);
             }
         });
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exchangestudentmanagementsystem/UB-logo.png"))); // NOI18N
-
-        cancel.setText("Cancel");
-        cancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelActionPerformed(evt);
-            }
-        });
-
-        createAppMotivLetter.setColumns(20);
-        createAppMotivLetter.setRows(5);
-        jScrollPane1.setViewportView(createAppMotivLetter);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,7 +252,8 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                                             .addComponent(jLabel7)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(createAppPostAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel9))
+                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel2))
                                     .addGap(29, 29, 29)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -258,10 +269,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(createAppMale)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(createAppFemale))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(155, 155, 155)
-                                    .addComponent(jLabel2)))))
+                                            .addComponent(createAppFemale)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -283,18 +291,15 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {createAppDOB, createAppName, createAppPostAddr});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -309,14 +314,14 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addComponent(createAppStudID)
                     .addComponent(createAppDOB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(createAppPostAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createAppMale)
                     .addComponent(createAppFemale))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,75 +359,18 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {createAppFOS, createAppHostCountry, createAppHostInst, createAppLOS});
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {createAppDOB, createAppName});
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createAppSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppSubmitActionPerformed
-        // TODO add your handling code here:
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
-                    "kii03486","kii03486");  
-            int username1 = Constants.usernameOnline;
-            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
-           Statement myPstmt = myConn.prepareStatement(query);
-           ResultSet myRs = myPstmt.executeQuery(query);
-//            
-            while(myRs.next()){
-               int userName = myRs.getInt("StudentID");
-               String fname = myRs.getString("FirstName");
-               String lname = myRs.getString("LastName");
-               int credits = myRs.getInt("CreditsTaken");
-               Date dob = myRs.getDate("DOB");
-               String hostCountry = createAppHostCountry.getText();
-               String hostInstitution = createAppHostInst.getText();
-               
-               String postal = myRs.getString("PostalAddress");
-               String createGender = myRs.getString("Gender");
-               String fulName = fname +" "+lname;
-               String fieldOfStudy = createAppFOS.getText();
-               String levelOfStudy = createAppLOS.getText();
-               String motivationalLetter = createAppMotivLetter.getText();
-               String status = "Not Approved"; 
-               
-               //String thisYear = new SimpleDateFormat("yyyy").format(new Date());
-               
-               int thisYears = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
-               int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
-               //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
-               int age= thisYears - doY;
-               String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-               PreparedStatement pstmt = myConn.prepareStatement(sql);
-               Statement stmt = myConn.createStatement();
-            pstmt.setString(1,fulName);
-            pstmt.setString(2, program);
-            pstmt.setInt(3, age);
-            pstmt.setString(4, createAppGender);
-            pstmt.setString(5, dob.toString());
-            pstmt.setInt(6, userName);
-            pstmt.setString(7, postal);
-            pstmt.setString(8, hostCountry);
-            pstmt.setString(9, hostInstitution);
-            pstmt.setString(10, fieldOfStudy);
-            pstmt.setString(11, levelOfStudy);
-            pstmt.setString(12, motivationalLetter);
-            pstmt.setString(13, status);
-            pstmt.executeUpdate();
-}
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    }//GEN-LAST:event_createAppSubmitActionPerformed
+    private void createAppProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppProgramActionPerformed
+        program = createAppProgram.getSelectedItem().toString();
+    }//GEN-LAST:event_createAppProgramActionPerformed
 
     private void createAppMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppMaleActionPerformed
         createAppMale.setActionCommand("male");
         createAppGender = "M";// TODO add your handling code here:
-        
+
     }//GEN-LAST:event_createAppMaleActionPerformed
 
     private void createAppFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppFemaleActionPerformed
@@ -430,24 +378,73 @@ public class CreateApplicationForm extends javax.swing.JFrame {
         createAppGender = "F"; // TODO add your handling code here:
     }//GEN-LAST:event_createAppFemaleActionPerformed
 
-    private void createAppProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppProgramActionPerformed
-        program = createAppProgram.getSelectedItem().toString();
-    }//GEN-LAST:event_createAppProgramActionPerformed
-
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         new StudentView().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cancelActionPerformed
 
+    private void createAppSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppSubmitActionPerformed
+        // TODO add your handling code here:
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                "kii03486","kii03486");
+            int username1 = Constants.usernameOnline;
+            String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
+            myPstmt = myConn.prepareStatement(query);
+            myRs = myPstmt.executeQuery(query);
+            //
+            while(myRs.next()){
+                int userName = myRs.getInt("StudentID");
+                String fname = myRs.getString("FirstName");
+                String lname = myRs.getString("LastName");
+                int credits = myRs.getInt("CreditsTaken");
+                Date dob = myRs.getDate("DOB");
+                int age = myRs.getInt("Age");
+                
+                String hostCountry = createAppHostCountry.getText();
+                String hostInstitution = createAppHostInst.getText();
+
+                String postal = myRs.getString("PostalAddress");
+                String gender = myRs.getString("Gender");
+                String fulName = fname +" "+lname;
+                String fieldOfStudy = createAppFOS.getText();
+                String levelOfStudy = createAppLOS.getText();
+                String motivationalLetter = createAppMotivLetter.getText();
+                String status = "Not Approved";
+
+                //String thisYear = new SimpleDateFormat("yyyy").format(new Date());
+
+                int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
+                //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
+                String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                PreparedStatement pstmt = myConn.prepareStatement(sql);
+                Statement stmt = myConn.createStatement();
+                pstmt.setString(1,fulName);
+                pstmt.setString(2, program);
+                pstmt.setInt(3, age);
+                pstmt.setString(4, createAppGender);
+                pstmt.setString(5, dob.toString());
+                pstmt.setInt(6, userName);
+                pstmt.setString(7, postal);
+                pstmt.setString(8, hostCountry);
+                pstmt.setString(9, hostInstitution);
+                pstmt.setString(10, fieldOfStudy);
+                pstmt.setString(11, levelOfStudy);
+                pstmt.setString(12, motivationalLetter);
+                pstmt.setString(13, status);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_createAppSubmitActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -456,19 +453,17 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateApplicationForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditApplication.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
         
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CreateApplicationForm().setVisible(true);
+                new EditApplication().setVisible(true);
             }
         });
     }
@@ -489,7 +484,6 @@ public class CreateApplicationForm extends javax.swing.JFrame {
     private javax.swing.JComboBox createAppProgram;
     private javax.swing.JTextField createAppStudID;
     private javax.swing.JButton createAppSubmit;
-    private javax.swing.ButtonGroup gender;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
