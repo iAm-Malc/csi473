@@ -44,6 +44,11 @@ public class Review extends javax.swing.JFrame {
             Statement programs = myConn.createStatement();
             String progs = "SELECT ProgramCode FROM csi473Program";
             ResultSet rs = programs.executeQuery(progs);
+            
+            while(rs.next())
+            {
+                createAppProgram.addItem(rs.getString("ProgramCode"));
+            }
 //            
             while(myRs.next()){
                String Name = myRs.getString("Name");
