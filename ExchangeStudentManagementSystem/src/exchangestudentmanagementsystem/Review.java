@@ -428,12 +428,17 @@ public class Review extends javax.swing.JFrame {
             String query = "UPDATE `csi473Application` SET `Status`='Processing' WHERE  `ApplicationNumber`="+appId;
             myPstmt = myConn.prepareStatement(query);
             myPstmt.executeUpdate(query);
-            JOptionPane.showMessageDialog(null,"Saved.");
+            
+            JOptionPane.showMessageDialog(null,"Status Review Saved!");
             new ReviewApplication().setVisible(true);        
             dispose();
-        }   
-        catch(ClassNotFoundException | SQLException e)
-        {}// TODO add your handling code here:
+            
+        } catch (ClassNotFoundException | SQLException ex) {   
+             Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         // TODO add your handling code here:
+   
+        // TODO add your handling code here:
     }//GEN-LAST:event_updateStatusActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
