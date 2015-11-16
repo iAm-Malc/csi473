@@ -274,11 +274,11 @@ public class EditProgramForm extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
-            int appId = Constants.reviewApplicationId;
-            String query = "UPDATE `csi473Program` SET `Status`='Processing' WHERE  `ApplicationNumber`="+appId;
+            int programCode = Constants.reviewApplicationId;
+            String query = "UPDATE `csi473Program` WHERE `ProgramCode`="+programCode;
             myPstmt = myConn.prepareStatement(query);
             myPstmt.executeUpdate(query);
-            JOptionPane.showMessageDialog(null,"Saved.");
+            JOptionPane.showMessageDialog(null,"Program Has Been Updated");
             new ReviewApplication().setVisible(true);        
             dispose();
             
