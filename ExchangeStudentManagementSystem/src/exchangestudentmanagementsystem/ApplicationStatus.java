@@ -6,13 +6,22 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Malcolm
  */
 public class ApplicationStatus extends javax.swing.JFrame {
-
+    String applicationStatus = " ";
+    Connection myConn = null;
+    Statement myPstmt = null;
+    ResultSet myRs = null;
     /**
      * Creates new form newApplicationStatus
      */
@@ -30,7 +39,6 @@ public class ApplicationStatus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        responseStatus = new javax.swing.ButtonGroup();
         appStatus = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,6 +50,7 @@ public class ApplicationStatus extends javax.swing.JFrame {
         received = new javax.swing.JRadioButton();
         processing = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,19 +73,46 @@ public class ApplicationStatus extends javax.swing.JFrame {
             }
         });
 
-        responseStatus.add(accepted);
+        appStatus.add(accepted);
         accepted.setText("Accepted");
+        accepted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptedActionPerformed(evt);
+            }
+        });
 
-        responseStatus.add(rejected);
+        appStatus.add(rejected);
         rejected.setText("Rejected");
+        rejected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rejectedActionPerformed(evt);
+            }
+        });
 
         appStatus.add(received);
         received.setText("Received");
+        received.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                receivedActionPerformed(evt);
+            }
+        });
 
         appStatus.add(processing);
         processing.setText("Processing");
+        processing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processingActionPerformed(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exchangestudentmanagementsystem/UB-logo.png"))); // NOI18N
+
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +141,8 @@ public class ApplicationStatus extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(back)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(statSave, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -137,7 +175,9 @@ public class ApplicationStatus extends javax.swing.JFrame {
                                 .addComponent(processing))))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addComponent(statSave)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(statSave)
+                    .addComponent(back))
                 .addGap(40, 40, 40))
         );
 
@@ -146,8 +186,42 @@ public class ApplicationStatus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statSaveActionPerformed
-        // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+            int appId = Constants.reviewApplicationId;
+            String query = "UPDATE `csi473Application` SET `Status`='"+applicationStatus+"' WHERE  `ApplicationNumber`="+appId;
+            myPstmt = myConn.prepareStatement(query);
+            myPstmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(null,"Saved.");
+            new ReviewApplication().setVisible(true);        
+            dispose();
+        }   
+        catch(ClassNotFoundException | SQLException e)
+        {}// TODO add your handling code here:
     }//GEN-LAST:event_statSaveActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        new AdvisorView().setVisible(true);        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void receivedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receivedActionPerformed
+        applicationStatus = "Recieved";        // TODO add your handling code here:
+    }//GEN-LAST:event_receivedActionPerformed
+
+    private void processingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processingActionPerformed
+        applicationStatus = "Processing";        // TODO add your handling code here:
+    }//GEN-LAST:event_processingActionPerformed
+
+    private void acceptedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptedActionPerformed
+        applicationStatus = "Accepted";        // TODO add your handling code here:
+    }//GEN-LAST:event_acceptedActionPerformed
+
+    private void rejectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectedActionPerformed
+        applicationStatus = "Rejected";        // TODO add your handling code here:
+    }//GEN-LAST:event_rejectedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +262,7 @@ public class ApplicationStatus extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton accepted;
     private javax.swing.ButtonGroup appStatus;
+    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -196,7 +271,6 @@ public class ApplicationStatus extends javax.swing.JFrame {
     private javax.swing.JRadioButton processing;
     private javax.swing.JRadioButton received;
     private javax.swing.JRadioButton rejected;
-    private javax.swing.ButtonGroup responseStatus;
     private javax.swing.JButton statSave;
     // End of variables declaration//GEN-END:variables
 }

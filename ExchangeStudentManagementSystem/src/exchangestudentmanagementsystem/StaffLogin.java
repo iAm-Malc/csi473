@@ -175,10 +175,8 @@ public class StaffLogin extends javax.swing.JFrame {
                         + "Please Try Again");
             }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(StaffLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginActionPerformed
 

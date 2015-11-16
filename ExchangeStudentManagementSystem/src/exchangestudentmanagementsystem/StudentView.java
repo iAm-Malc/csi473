@@ -135,8 +135,8 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void checkAppStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAppStatusActionPerformed
-        // TODO add your handling code here:
-        
+        new DisplayApplicationStatus().setVisible(true);
+        dispose();
     }//GEN-LAST:event_checkAppStatusActionPerformed
 
     private void editApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editApplicationActionPerformed
