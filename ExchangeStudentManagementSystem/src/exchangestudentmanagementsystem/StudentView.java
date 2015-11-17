@@ -6,12 +6,24 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author Malcolm
  */
 public class StudentView extends javax.swing.JFrame {
+    Statement myPstmt = null;
+    ResultSet myRs = null;
+    Connection myConn = null;
 
     /**
      * Creates new form newStudentView
@@ -133,8 +145,25 @@ public class StudentView extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void checkAppStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAppStatusActionPerformed
-        new DisplayApplicationStatus().setVisible(true);
-        dispose();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");
+            int user = Constants.usernameOnline;
+            String sql = "SELECT * FROM csi473Application WHERE StudentID='"+user+"'";    
+            myPstmt = myConn.prepareStatement(sql);
+            myRs = myPstmt.executeQuery(sql);
+            if (myRs.getInt(sql)==user) {    
+                new DisplayApplicationStatus().setVisible(true);
+                dispose();
+            } 
+            else{
+                JOptionPane.showMessageDialog(null,"You Have Not Submitted An Application!!");
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_checkAppStatusActionPerformed
 
     private void editApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editApplicationActionPerformed
