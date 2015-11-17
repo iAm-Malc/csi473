@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package exchangestudentmanagementsystem;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,8 +14,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -26,7 +25,6 @@ public class AddProgram extends javax.swing.JFrame {
     Statement myPstmt = null;
     ResultSet myRs = null;
     Connection myConn = null;
-    private Object dateFormatter;
     /**
      * Creates new form newAddProgram
      */
@@ -109,11 +107,6 @@ public class AddProgram extends javax.swing.JFrame {
             }
         });
 
-        beginDate.setDateFormatString("yyyy-MM-dd");
-
-        endDate.setDateFormatString("yyyy-MM-dd");
-        endDate.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,15 +121,19 @@ public class AddProgram extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(duration)
-                                    .addComponent(progName, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                    .addComponent(endDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(duration)
+                                            .addComponent(progName, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(beginDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(beginDate, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,11 +178,11 @@ public class AddProgram extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(progName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -240,12 +237,13 @@ public class AddProgram extends javax.swing.JFrame {
             int progDuration = Integer.parseInt(duration.getText());
             String hostCntry = hostCountry.getText();
             String institution = hostInst.getText();
-            Date begin = beginDate.getDate();
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+            String begin = dateFormatter.format(beginDate.getDate());
             Calendar cal = Calendar.getInstance();
-            cal.setTime(begin);
-            cal.add(Calendar.DATE, 102);
-            String expDateString = dateFormatter.format(cal.getTime());
-            String end = begin.add(Calendar.DATE, 5);;
+            cal.setTime(beginDate.getDate());
+            cal.add(Calendar.DATE, progDuration*30);
+            String end = dateFormatter.format(cal.getTime());
+            endDate.setDate(cal.getTime());
             int credits = Integer.parseInt(noOfCredits.getText());
             String sql = "INSERT INTO `csi473Program`(`ProgramCode`, `ProgramTitle`, `Duration`, `HostUniversity`, `HostCountry`, `StartDate`, `EndDate`, `Credits`,`Status`) VALUES (?,?,?,?,?,?,?,?,'inactive');";
             PreparedStatement pstmt = myConn.prepareStatement(sql);
@@ -258,6 +256,9 @@ public class AddProgram extends javax.swing.JFrame {
             pstmt.setString(7, end);
             pstmt.setInt(8, credits);
             pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Program Added.");
+            new AddProgram().setVisible(true);
+            dispose();
         }
         catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);

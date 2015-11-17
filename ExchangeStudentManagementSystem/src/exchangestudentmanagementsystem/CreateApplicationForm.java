@@ -444,6 +444,12 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                     pstmt.setString(12, motivationalLetter);
                     pstmt.setString(13, status);
                     pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null,"Application Saved.");
+               }
+               else
+               {
+                   JOptionPane.showMessageDialog(null,"Requirements Have Not Been Met"
+                           + "Application Not Sent.");
                }
     }
         } catch (SQLException | ClassNotFoundException ex) {

@@ -138,13 +138,12 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deactivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deactivateActionPerformed
-        String query = "SELECT * FROM csi473Program";
-        
         try {
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
             String pCode = progCode.getText();
+            String query = "SELECT * FROM csi473Program WHERE ProgramCode ='"+pCode+"'";
             myPstmt = myConn.createStatement();
             myRs = myPstmt.executeQuery(query);
 //            
@@ -169,13 +168,12 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
     }//GEN-LAST:event_deactivateActionPerformed
 
     private void activateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateActionPerformed
-        String query = "SELECT * FROM csi473Program";
-        
         try {
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
             String pCode = progCode.getText();
+            String query = "SELECT * FROM csi473Program WHERE ProgramCode ='"+pCode+"'";
             myPstmt = myConn.createStatement();
             myRs = myPstmt.executeQuery(query);
 //            
@@ -233,6 +231,7 @@ public class UpdateProgramStatus extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new UpdateProgramStatus().setVisible(true);
             }
