@@ -58,10 +58,20 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                String createGender = myRs.getString("Gender");
                String thisYear = new SimpleDateFormat("yyyy").format(new Date());
                
+                if (createGender.equals("M") ){
+                   createAppMale.setSelected(true); 
+                   createAppGender = "M";
+               } 
+               else {
+                    createAppFemale.setSelected(true);
+                    createAppGender = "F";
+               } 
+               
                int thisYears = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
                int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
-               //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
                int age= thisYears - doY;
+               String ageString = ""+age+"";
+               createAppAge.setText(ageString);
                
                createAppName.setText(fname+" "+lname);
                createAppDOB.setText(dob.toString());
@@ -139,11 +149,21 @@ public class CreateApplicationForm extends javax.swing.JFrame {
 
         jLabel8.setText("Gender:");
 
+        createAppName.setEnabled(false);
+
         createAppAge.setText(" ");
+        createAppAge.setEnabled(false);
         createAppAge.setPreferredSize(new java.awt.Dimension(9, 23));
+
+        createAppStudID.setEnabled(false);
+
+        createAppDOB.setEnabled(false);
+
+        createAppPostAddr.setEnabled(false);
 
         gender.add(createAppMale);
         createAppMale.setText("M");
+        createAppMale.setEnabled(false);
         createAppMale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createAppMaleActionPerformed(evt);
@@ -152,6 +172,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
 
         gender.add(createAppFemale);
         createAppFemale.setText("F");
+        createAppFemale.setEnabled(false);
         createAppFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createAppFemaleActionPerformed(evt);
@@ -418,13 +439,7 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                String levelOfStudy = createAppLOS.getText();
                String motivationalLetter = createAppMotivLetter.getText();
                String status = "Not Approved"; 
-               
-               //String thisYear = new SimpleDateFormat("yyyy").format(new Date());
-               
-               int thisYears = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
-               int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
-               //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
-               int age= thisYears - doY;
+               int age= Integer.parseInt(createAppAge.getText());               
                
                if (isEligible(program)){
                     String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
