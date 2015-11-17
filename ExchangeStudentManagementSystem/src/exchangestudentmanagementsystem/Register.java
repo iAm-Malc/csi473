@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -305,7 +309,8 @@ public class Register extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
          
-   Connection conn = null;
+   Connection conn;
+        //conn = null;
    Statement stmt = null;
    try{
       //STEP 2: Register JDBC driver
@@ -314,7 +319,7 @@ public class Register extends javax.swing.JFrame {
       //STEP 3: Open a connection
       conn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                    "kii03486","kii03486"); 
-      System.out.println("Connected database successfully...");
+     // System.out.println("Connected database successfully...");
       
       //STEP 4: Execute a query
       stmt = conn.createStatement();
@@ -326,6 +331,13 @@ public class Register extends javax.swing.JFrame {
       String postal = regPost.getText();
       int studID = Integer.parseInt(regStudID.getText());
       String password = new String (regPass.getPassword());
+      String hashedpass = "";
+       try {
+           hashedpass = HashPassword.generateStrongPasswordHash(password);
+           System.out.println(hashedpass);
+       } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
+           Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+       }
      
       String sql = "INSERT INTO `csi473Student`(`StudentID`, `FirstName`, `LastName`, `DOB`, `CreditsTaken`, `PostalAddress`, `Gender`, `Password`) VALUES (?,?,?,?,?,?,?,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -336,7 +348,7 @@ public class Register extends javax.swing.JFrame {
       pstmt.setInt(5, 11);
       pstmt.setString(6, postal);
       pstmt.setString(7, regGender);
-      pstmt.setString(8, password);
+      pstmt.setString(8, hashedpass);
       if (password.equals(regConPass.getText())){
             pstmt.executeUpdate();
             new StudentLogin().setVisible(true);
@@ -348,24 +360,8 @@ public class Register extends javax.swing.JFrame {
 
    }catch(SQLException se){
    }catch(ClassNotFoundException | NumberFormatException | HeadlessException e){
-   }finally{
-      //finally block used to close resources
-      try{
-         if(stmt!=null)
-            conn.close();
-      }catch(SQLException se){
-      }// do nothing
-      try{
-         if(conn!=null)
-            conn.close();
-         this.setVisible(false);
-         
-      }catch(SQLException se){
-      }//end finally try
-      
    }
-  // this.setVisible(false);
-   //new StudentLogin().setVisible(true);
+
     }//GEN-LAST:event_registerActionPerformed
 
     private void regDOBPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_regDOBPropertyChange
