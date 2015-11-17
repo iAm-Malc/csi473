@@ -297,7 +297,7 @@ public class EditProgramForm extends javax.swing.JFrame {
             pstmt.setInt(8, credits);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Program Has Been Updated!");
-            new ReviewApplication().setVisible(true);        
+            new EditProgramList().setVisible(true);        
             dispose();
             
         } catch (ClassNotFoundException | SQLException ex) {
