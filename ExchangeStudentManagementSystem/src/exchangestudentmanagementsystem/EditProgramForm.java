@@ -8,6 +8,7 @@ package exchangestudentmanagementsystem;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,6 +25,7 @@ public class EditProgramForm extends javax.swing.JFrame {
     Connection myConn = null;
      Statement myPstmt = null;
      ResultSet myRs = null;
+     String programCode = Constants.programCode;
 
     /**
      * Creates new form newEditProgramForm
@@ -36,8 +38,8 @@ public class EditProgramForm extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
-            int programCode = Constants.reviewApplicationId;
-            String query = "SELECT * FROM `csi473Program` WHERE `ProgramCode`="+programCode;
+            String programCode = Constants.programCode;
+            String query = "SELECT * FROM `csi473Program` WHERE `ProgramCode`='"+programCode+"'";
             myPstmt = myConn.prepareStatement(query);
             myRs = myPstmt.executeQuery(query);
            
@@ -264,7 +266,7 @@ public class EditProgramForm extends javax.swing.JFrame {
 
     private void editProgCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProgCancelActionPerformed
         // TODO add your handling code here:
-        new OIEStaff().setVisible(true);
+        new EditProgramList().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_editProgCancelActionPerformed
 
@@ -274,10 +276,26 @@ public class EditProgramForm extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
-            int programCode = Constants.reviewApplicationId;
-            String query = "UPDATE `csi473Program` WHERE `ProgramCode`="+programCode;
-            myPstmt = myConn.prepareStatement(query);
-            myPstmt.executeUpdate(query);
+            String query = "UPDATE `csi473Program`SET `ProgramCode`=?, `ProgramTitle`=?, `Duration`=?, `HostUniversity`=?, `HostCountry`=?, `StartDate`=?, `EndDate`=?, `Credits`=? WHERE `ProgramCode`='"+programCode+"'";
+            String name = progName.getText();
+            String code = editProgCode.getText();
+            int duration = Integer.parseInt(progDuration.getText());
+            String hostCntry = hostCountry.getText();
+            String institution = hostInst.getText();
+            String begin = beginDate.getText();
+            String end = editEndDate.getText();
+            int credits = Integer.parseInt(noOfCredits.getText());
+            PreparedStatement pstmt = myConn.prepareStatement(query);
+            
+            pstmt.setString(1, code);
+            pstmt.setString(2, name);
+            pstmt.setInt(3, duration);
+            pstmt.setString(4, institution);
+            pstmt.setString(5, hostCntry);
+            pstmt.setString(6, begin);
+            pstmt.setString(7, end);
+            pstmt.setInt(8, credits);
+            pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Program Has Been Updated!");
             new ReviewApplication().setVisible(true);        
             dispose();

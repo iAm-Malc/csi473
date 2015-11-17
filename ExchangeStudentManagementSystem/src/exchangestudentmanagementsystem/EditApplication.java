@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,7 @@ public class EditApplication extends javax.swing.JFrame {
     Connection myConn = null;
     Statement myPstmt = null;
     ResultSet myRs = null;
+    int user = Constants.usernameOnline;
 
     /**
      * Creates new form EditApplication
@@ -39,7 +41,7 @@ public class EditApplication extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
                     "kii03486","kii03486");  
-            int user = Constants.usernameOnline;
+            
             String query = "SELECT * FROM `csi473Application` WHERE `StudentID`="+user;
             myPstmt = myConn.prepareStatement(query);
             myRs = myPstmt.executeQuery(query);
@@ -75,9 +77,11 @@ public class EditApplication extends javax.swing.JFrame {
                createAppProgram.setSelectedItem(reviewprogram);
                if (reviewgender.equals("M") ){
                    createAppMale.setSelected(true); 
+                   createAppGender = "M";
                } 
                else {
-                    createAppFemale.setSelected(true); 
+                    createAppFemale.setSelected(true);
+                    createAppGender = "F";
                } 
                createAppHostCountry.setText(hostCntry);
                createAppHostInst.setText(hostInst);
@@ -94,6 +98,7 @@ public class EditApplication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        gender = new javax.swing.ButtonGroup();
         createAppHostInst = new javax.swing.JTextField();
         createAppHostCountry = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -167,6 +172,7 @@ public class EditApplication extends javax.swing.JFrame {
         createAppAge.setText(" ");
         createAppAge.setPreferredSize(new java.awt.Dimension(9, 23));
 
+        gender.add(createAppMale);
         createAppMale.setText("M");
         createAppMale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +180,7 @@ public class EditApplication extends javax.swing.JFrame {
             }
         });
 
+        gender.add(createAppFemale);
         createAppFemale.setText("F");
         createAppFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,24 +432,25 @@ public class EditApplication extends javax.swing.JFrame {
                 String lname = myRs.getString("LastName");
                 int credits = myRs.getInt("CreditsTaken");
                 Date dob = myRs.getDate("DOB");
-                int age = myRs.getInt("Age");
+                String gen = myRs.getString("Gender");
+                String thisYear = new SimpleDateFormat("yyyy").format(new Date());
+               
+               int thisYears = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
+               int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
+               //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
+               int age= thisYears - doY;
                 
                 String hostCountry = createAppHostCountry.getText();
                 String hostInstitution = createAppHostInst.getText();
 
                 String postal = myRs.getString("PostalAddress");
-                String gender = myRs.getString("Gender");
                 String fulName = fname +" "+lname;
                 String fieldOfStudy = createAppFOS.getText();
                 String levelOfStudy = createAppLOS.getText();
                 String motivationalLetter = createAppMotivLetter.getText();
-                String status = "Not Approved";
+                String status = "Recieved";
 
-                //String thisYear = new SimpleDateFormat("yyyy").format(new Date());
-
-                int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
-                //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
-                String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                String sql = "UPDATE `csi473Application` SET `Name`=?, `ProgramCode`=?, `Age`=?, `Gender`=?, `DOB`=?, `StudentID`=?, `PostalAddress`=?, `HostCountry`=?, `HostUniversity`=?, `FieldOfStudy`=?, `LevelOfStudy`=?, `MotivationalLetter`=?, `Status`=? WHERE `StudentID`="+user;
                 PreparedStatement pstmt = myConn.prepareStatement(sql);
                 Statement stmt = myConn.createStatement();
                 pstmt.setString(1,fulName);
@@ -459,6 +467,9 @@ public class EditApplication extends javax.swing.JFrame {
                 pstmt.setString(12, motivationalLetter);
                 pstmt.setString(13, status);
                 pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Application Has Been Updated!");
+                new StudentView().setVisible(true);        
+                dispose();
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -509,6 +520,7 @@ public class EditApplication extends javax.swing.JFrame {
     private javax.swing.JComboBox createAppProgram;
     private javax.swing.JTextField createAppStudID;
     private javax.swing.JButton createAppSubmit;
+    private javax.swing.ButtonGroup gender;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

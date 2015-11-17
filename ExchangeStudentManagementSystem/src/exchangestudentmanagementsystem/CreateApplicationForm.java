@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -398,8 +399,8 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                     "kii03486","kii03486");  
             int username1 = Constants.usernameOnline;
             String query = "SELECT * FROM `csi473Student` WHERE `StudentID`="+username1;
-           Statement myPstmt = myConn.prepareStatement(query);
-           ResultSet myRs = myPstmt.executeQuery(query);
+            Statement myPstmt = myConn.prepareStatement(query);
+            ResultSet myRs = myPstmt.executeQuery(query);
 //            
             while(myRs.next()){
                int userName = myRs.getInt("StudentID");
@@ -424,29 +425,52 @@ public class CreateApplicationForm extends javax.swing.JFrame {
                int doY = Integer.parseInt(new SimpleDateFormat("yyyy").format(dob));
                //int age = new SimpleDateFormat("yyyy/MM/dd") - dob;
                int age= thisYears - doY;
-               String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
-               PreparedStatement pstmt = myConn.prepareStatement(sql);
-               Statement stmt = myConn.createStatement();
-            pstmt.setString(1,fulName);
-            pstmt.setString(2, program);
-            pstmt.setInt(3, age);
-            pstmt.setString(4, createAppGender);
-            pstmt.setString(5, dob.toString());
-            pstmt.setInt(6, userName);
-            pstmt.setString(7, postal);
-            pstmt.setString(8, hostCountry);
-            pstmt.setString(9, hostInstitution);
-            pstmt.setString(10, fieldOfStudy);
-            pstmt.setString(11, levelOfStudy);
-            pstmt.setString(12, motivationalLetter);
-            pstmt.setString(13, status);
-            pstmt.executeUpdate();
-}
+               
+               if (isEligible(program)){
+                    String sql = "INSERT INTO `csi473Application`(`Name`, `ProgramCode`, `Age`, `Gender`, `DOB`, `StudentID`, `PostalAddress`, `HostCountry`, `HostUniversity`, `FieldOfStudy`, `LevelOfStudy`, `MotivationalLetter`, `Status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                    PreparedStatement pstmt = myConn.prepareStatement(sql);
+                    Statement stmt = myConn.createStatement();
+                    pstmt.setString(1,fulName);
+                    pstmt.setString(2, program);
+                    pstmt.setInt(3, age);
+                    pstmt.setString(4, createAppGender);
+                    pstmt.setString(5, dob.toString());
+                    pstmt.setInt(6, userName);
+                    pstmt.setString(7, postal);
+                    pstmt.setString(8, hostCountry);
+                    pstmt.setString(9, hostInstitution);
+                    pstmt.setString(10, fieldOfStudy);
+                    pstmt.setString(11, levelOfStudy);
+                    pstmt.setString(12, motivationalLetter);
+                    pstmt.setString(13, status);
+                    pstmt.executeUpdate();
+               }
+    }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }//GEN-LAST:event_createAppSubmitActionPerformed
-
+    public boolean isEligible(String programCode)
+        {
+            boolean eligible = true;
+            try
+            {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");  
+                int username1 = Constants.usernameOnline;
+                String query = "SELECT * FROM `csi473CourseTaking`,`csi473EquivalenceCourse` WHERE csi473CourseTaking.StudentID="+username1+"AND csi473CourseTaking.courseCode = csi473EquivalenceCourse.courseCode "
+                        + "AND csi473EquivalenceCourse.programCode='"+programCode+"'";
+                Statement myPstmt = myConn.prepareStatement(query);
+                ResultSet myRs = myPstmt.executeQuery(query);
+                if(!myRs.next())
+                {
+                    eligible = false;
+                }
+            }
+            catch(ClassNotFoundException | SQLException e){}
+            return eligible;
+        }
     private void createAppMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAppMaleActionPerformed
         createAppMale.setActionCommand("male");
         createAppGender = "M";// TODO add your handling code here:

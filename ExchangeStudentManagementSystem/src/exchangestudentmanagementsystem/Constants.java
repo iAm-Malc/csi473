@@ -13,5 +13,6 @@ public class Constants {
     
     public static int usernameOnline = 0;
     public static int reviewApplicationId = 0;
+    public static String programCode = "";
     
 }

@@ -90,6 +90,12 @@ public class EditProgramList extends javax.swing.JFrame {
                 "Program Code", "Program Title"
             }
         ));
+        programList.setCellSelectionEnabled(true);
+        programList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                programListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(programList);
 
         editProgram.setText("Edit");
@@ -173,6 +179,7 @@ public class EditProgramList extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void progListCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_progListCancelActionPerformed
@@ -187,12 +194,12 @@ public class EditProgramList extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_editProgramActionPerformed
 
-    private void applicationsTableMouseClicked(java.awt.event.MouseEvent evt) {                                               
+    private void programListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programListMouseClicked
         String programCode = programList.getValueAt(programList.getSelectedRow(), 0).toString();
         selectedProgram.setText(programCode);// TODO add your handling code here:
-        Constants.reviewApplicationId = Integer.parseInt(selectedProgram.getText());
-    }
-    
+            Constants.programCode = selectedProgram.getText();// TODO add your handling code here:
+    }//GEN-LAST:event_programListMouseClicked
+
     /**
      * @param args the command line arguments
      */
