@@ -7,6 +7,8 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -191,7 +193,7 @@ public class StudentLogin extends javax.swing.JFrame {
             while(myRs.next()){
                int uname = myRs.getInt("StudentID");
                String pword = myRs.getString("Password");
-               if((username1== uname) && (password1.equals(pword))){
+               if((username1== uname) && (HashPassword.validatePassword(password1,pword))){
                    Constants.usernameOnline = username1;
                    new StudentView().setVisible(true);
                    dispose();
@@ -202,6 +204,10 @@ public class StudentLogin extends javax.swing.JFrame {
             }
             }
         } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeySpecException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginActionPerformed

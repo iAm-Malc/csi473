@@ -6,6 +6,8 @@
 package exchangestudentmanagementsystem;
 
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -164,7 +166,7 @@ public class OIEAdvisorLogin extends javax.swing.JFrame {
             while(myRs.next()){
                String uname = myRs.getString("AdvisorID");
                String pword = myRs.getString("universityPassword");
-               if(user.equals(uname) && (password1.equals(pword))){
+               if(user.equals(uname) && (HashPassword.validatePassword(password1,pword))){
                    new ReviewApplication().setVisible(true);
                    dispose();
                }
@@ -176,6 +178,10 @@ public class OIEAdvisorLogin extends javax.swing.JFrame {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(OIEAdvisorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(OIEAdvisorLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_loginActionPerformed
 

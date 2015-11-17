@@ -11,18 +11,18 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class HashPassword 
 {
-//	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException 
-//	{
-//		String  originalPassword = "malc123";
-//		String generatedSecuredPasswordHash = generateStrongPasswordHash(originalPassword);
-//		System.out.println(generatedSecuredPasswordHash);
-//		
-//		boolean matched = validatePassword(originalPassword, generatedSecuredPasswordHash);
-//		System.out.println(matched);
-//		
-//		matched = validatePassword("password1", generatedSecuredPasswordHash);
-//		System.out.println(matched);
-//	}
+	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException 
+	{
+		String  originalPassword = "malc123";
+		String generatedSecuredPasswordHash = generateStrongPasswordHash(originalPassword);
+		System.out.println(generatedSecuredPasswordHash);
+		
+		boolean matched = validatePassword(originalPassword, generatedSecuredPasswordHash);
+		System.out.println(matched);
+		
+		matched = validatePassword("password1", generatedSecuredPasswordHash);
+		System.out.println(matched);
+	}
 	
 	public static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException
 	{
