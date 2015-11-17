@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -313,7 +314,8 @@ public class Register extends javax.swing.JFrame {
       String fname = regfName.getText();
       String lname = regsName.getText();
       int age = Integer.parseInt(regAge.getText());
-      String dob = regDOB.getDateFormatString();
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+      String dob = dateFormatter.format(regDOB.getDate());
       String postal = regPost.getText();
       int studID = Integer.parseInt(regStudID.getText());
       String password = new String (regPass.getPassword());
