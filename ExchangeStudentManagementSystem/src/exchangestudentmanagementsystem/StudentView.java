@@ -153,13 +153,15 @@ public class StudentView extends javax.swing.JFrame {
             String sql = "SELECT * FROM csi473Application WHERE StudentID='"+user+"'";    
             myPstmt = myConn.prepareStatement(sql);
             myRs = myPstmt.executeQuery(sql);
-            if (myRs.getInt(sql)==user) {    
-                new DisplayApplicationStatus().setVisible(true);
-                dispose();
-            } 
-            else{
-                JOptionPane.showMessageDialog(null,"You Have Not Submitted An Application!!");
+            if(myRs.next()){
+                if (user==myRs.getInt("StudentID")) {    
+                    new DisplayApplicationStatus().setVisible(true);
+                    dispose();
+                }   
             }
+             else{
+                    JOptionPane.showMessageDialog(null,"You Have Not Submitted An Application!!");
+                }
             
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,8 +180,26 @@ public class StudentView extends javax.swing.JFrame {
 
     private void createApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createApplicationActionPerformed
         // TODO add your handling code here:
-        new CreateApplicationForm().setVisible(true);
-        dispose();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
+                    "kii03486","kii03486");
+            int user = Constants.usernameOnline;
+            String sql = "SELECT * FROM csi473Application WHERE StudentID='"+user+"'";    
+            myPstmt = myConn.prepareStatement(sql);
+            myRs = myPstmt.executeQuery(sql);
+            if(myRs.next()){
+                JOptionPane.showMessageDialog(null,"You Have Already Submitted An Application!!");  
+            }
+             else{
+                    new CreateApplicationForm().setVisible(true);
+                    dispose(); 
+                }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(StudentLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_createApplicationActionPerformed
 
     /**
