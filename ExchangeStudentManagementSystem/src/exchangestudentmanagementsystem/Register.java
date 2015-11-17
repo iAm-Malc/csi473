@@ -92,6 +92,8 @@ public class Register extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel10.setText("REGISTER");
 
+        regAge.setEnabled(false);
+
         gender.add(male);
         male.setText("M");
         male.addActionListener(new java.awt.event.ActionListener() {
