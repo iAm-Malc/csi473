@@ -11,11 +11,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Statement;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +26,9 @@ import java.util.logging.Logger;
  */
 public class Register extends javax.swing.JFrame {
     
-
+    Statement myPstmt = null;
     String regGender = "";
+    Connection myConn = null;
 
     /**
      * Creates new form newRegister
@@ -162,11 +164,8 @@ public class Register extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(regConPass, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, 0)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(regPass, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                                            .addComponent(regStudID)))))
+                                    .addComponent(regPass, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                                    .addComponent(regStudID)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -307,66 +306,56 @@ public class Register extends javax.swing.JFrame {
         regGender = "M";
     }//GEN-LAST:event_maleActionPerformed
 
-    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
-         
-   Connection conn;
-        //conn = null;
-   Statement stmt = null;
-   try{
-      //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
-
-      //STEP 3: Open a connection
-      conn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486",
-                   "kii03486","kii03486"); 
-     // System.out.println("Connected database successfully...");
-      
-      //STEP 4: Execute a query
-      stmt = conn.createStatement();
-      String fname = regfName.getText();
-      String lname = regsName.getText();
-      int age = Integer.parseInt(regAge.getText());
-      SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-      String dob = dateFormatter.format(regDOB.getDate());
-      String postal = regPost.getText();
-      int studID = Integer.parseInt(regStudID.getText());
-      String password = new String (regPass.getPassword());
-      String hashedpass = "";
-       try {
-           hashedpass = HashPassword.generateStrongPasswordHash(password);
-           System.out.println(hashedpass);
-       } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-           Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-       }
-     
-      String sql = "INSERT INTO `csi473Student`(`StudentID`, `FirstName`, `LastName`, `DOB`, `CreditsTaken`, `PostalAddress`, `Gender`, `Password`) VALUES (?,?,?,?,?,?,?,?)";
-      PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, studID);
-      pstmt.setString(2, fname);
-      pstmt.setString(3, lname);
-      pstmt.setString(4, dob);
-      pstmt.setInt(5, 11);
-      pstmt.setString(6, postal);
-      pstmt.setString(7, regGender);
-      pstmt.setString(8, hashedpass);
-      if (password.equals(regConPass.getText())){
-            pstmt.executeUpdate();
-            new StudentLogin().setVisible(true);
-            dispose();
-      }else{
-          JOptionPane.showMessageDialog(null,"Passwords don't match, "
-                        + "Please Try Again");
-             }
-
-   }catch(SQLException se){
-   }catch(ClassNotFoundException | NumberFormatException | HeadlessException e){
-   }
-
-    }//GEN-LAST:event_registerActionPerformed
-
     private void regDOBPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_regDOBPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_regDOBPropertyChange
+
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        String password = new String (regPass.getPassword());
+        String hashedpass = "";
+        
+        try{
+            hashedpass = HashPassword.generateStrongPasswordHash(password);
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486","kii03486","kii03486");
+        }
+        catch(NoSuchAlgorithmException | InvalidKeySpecException | ClassNotFoundException | SQLException e){}
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            myConn = DriverManager.getConnection("jdbc:mysql://10.0.19.74/db_kii03486","kii03486","kii03486"); 
+            myPstmt = myConn.createStatement();
+            String fname = regfName.getText();
+            String lname = regsName.getText();
+            int stdID = Integer.parseInt(regStudID.getText());
+            String password1 = regConPass.getText();
+            String postal = regPost.getText();
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+            String dob = dateFormatter.format(regDOB.getDate());
+            String sql = "INSERT INTO `csi473Student`(`StudentID`, `FirstName`, `LastName`, `DOB`, `CreditsTaken`, `PostalAddress`, `Gender`, `Password`) VALUES (?,?,?,?,?,?,?,?);";
+            PreparedStatement pstmt = myConn.prepareStatement(sql);
+            pstmt.setInt(1, stdID);
+            pstmt.setString(2, fname);
+            pstmt.setString(3, lname);
+            pstmt.setString(4, dob);
+            pstmt.setInt(5, 11);
+            pstmt.setString(6, postal);
+            pstmt.setString(7, regGender);
+            pstmt.setString(8, hashedpass);
+            if(password.equals(password1)){
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Registered Successfully.");
+                new StudentLogin().setVisible(true);
+                dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Passwords Do Not Match Please Try Again.");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_registerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,6 +387,7 @@ public class Register extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Register().setVisible(true);
             }
